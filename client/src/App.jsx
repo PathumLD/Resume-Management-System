@@ -8,32 +8,25 @@ import Navbar from './components/shared/candidate/Navbar'
 import { Outlet } from 'react-router-dom';
 
 import CandidateProfile from './pages/candidate/CandidateProfile'
-import CandidateSidebar from './components/shared/candidate/CandidateSidebar'
+import Footer from './components/Footer'
+import CandidateAppliedVacancies from './pages/candidate/CandidateAppliedVacancies'
+import CandidateInterviews from './pages/candidate/CandidateInterviews'
+import CandidateAllVacancies from './pages/candidate/CandidateAllVacancies'
+import CandidateCompanies from './pages/candidate/CandidateCompanies'
+import CandidateEvents from './pages/candidate/CandidateEvents'
+import CompanyProfile from './pages/company/CompanyProfile'
+import CompanyNavbar from './components/shared/company/CompanyNavbar'
 
 
-
-// const Layout = ({ children }) => {
-//   return (
-//     <div className="flex flex-row w-full h-[55rem] overflow-hidden sm:flex-row">
-//       <div className="w-64 ">
-//         <CandidateSidebar />
-//       </div>
-//       <div className="flex flex-col flex-grow overflow-hidden">
-//         <Navbar />
-//         <div className="grid flex-grow p-4 overflow-auto grid-col-6">
-//           {children}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+const userType = localStorage.getItem('userType')
 
 const Layout = ({ children }) => {
     return (
       <>
       <div className='flex flex-col'>
       <div className=' w-full fixed'>
-        <Navbar />
+        {userType === 'candidate' ? <Navbar /> : <CompanyNavbar />}
+        
       </div>
       <div className='mt-20'> 
         {children}
@@ -43,29 +36,6 @@ const Layout = ({ children }) => {
     );
   };
 
-
-
-
-
-
-// const ProtectedRoute = ({children}) => {
-//   const [isAuthenticated] = useAuth();
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     if (!isAuthenticated) {
-//       navigate('/login');
-//     }
-//   }, [isAuthenticated, navigate]);
-
-//   if (!isAuthenticated) {
-//     return null;
-//   }
-
-//   return (
-//       children
-//   )
-// };
 
 function App() {
   
@@ -77,7 +47,24 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
+        {userType === 'candidate' ? (
+        <>
+             {/* Candidate */}
         <Route path="/candidate" element={<Layout><CandidateProfile /></Layout>} />
+        <Route path="/candidate/applied-vacancies" element={<Layout><CandidateAppliedVacancies /></Layout>} />
+        <Route path="/candidate/interviews" element={<Layout><CandidateInterviews /></Layout>} />
+        <Route path="/candidate/all-vacancies" element={<Layout><CandidateAllVacancies /></Layout>} />
+        <Route path="/candidate/companies" element={<Layout><CandidateCompanies /></Layout>} />
+        <Route path="/candidate/events" element={<Layout><CandidateEvents /></Layout>} />
+        </>
+
+        ) : (
+
+        <>
+              {/* Company */}
+        <Route path="/company" element={<Layout><CompanyProfile /></Layout>} />
+        </>
+        )}
 
       </Routes>
     </>

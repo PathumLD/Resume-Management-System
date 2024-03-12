@@ -38,13 +38,24 @@ const Login = () => {
 
             if (response.status === 200) {
                 console.log('Login successful');
-                localStorage.setItem('userType', 'candidate'); // or 'company'
+                // localStorage.setItem('userType', 'candidate'); // or 'company'
                 localStorage.setItem('candidateToken', response.data.token);
                 
-                localStorage.setItem('candidate', JSON.stringify(response.data.candidate));
+                localStorage.setItem('candidate', JSON.stringify(response.data.client));
 
+                // Set user type in local storage
+                localStorage.setItem('userType', data.userType);
+
+                const userType = response.data.client.userType;
+                console.log('userType:', userType);
+
+                // Navigate based on user type
+                if (userType === 'candidate') {
+                  navigate('/candidate');
+              } else if (userType === 'company') {
+                  navigate('/company');
+              }
                 
-                navigate(`/candidate`);
             } else {
                 console.error('Login failed');
             }

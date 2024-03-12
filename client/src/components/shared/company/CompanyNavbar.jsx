@@ -8,6 +8,7 @@ import axios from 'axios'
 
 import { Link } from 'react-router-dom';
 import { CandidateNavbarNavigation } from '../../../data/CandidateNavbarNavigation';
+import { CompanyNavbarNavigation } from '../../../data/CompanyNavbarNavigation';
 
 
 
@@ -15,7 +16,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const Navbar = () => {
+const CompanyNavbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -53,14 +54,14 @@ const Navbar = () => {
                     TalentFolio
                   </button>
                 </div>
-                <div className="hidden xl:mx-auto md:ml-16 lg-ml-24 sm:block ">
+                <div className="hidden md:mx-auto  sm:block ">
                   <div className="flex space-x-4 ">
-                    {CandidateNavbarNavigation.map((item) => (
+                    {CompanyNavbarNavigation.map((item) => (
                       <Link
                       key={item.key}
                       to={item.path}
                       className={classNames(
-                        item.current ? 'bg-gray-900 text-white text-center  '  : 'text-white  hover:font-bold text-center',
+                        item.current ? 'bg-gray-900 text-white text-center '  : 'text-white  hover:font-bold text-center ',
                         'rounded-md px-3 py-2 text-md font-medium',
                         location.pathname === item.path ? 'bg-gray-900 border-b-4 border-b-blue ' : ''
                       )}
@@ -145,7 +146,7 @@ const Navbar = () => {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
-            {CandidateNavbarNavigation.map((item) => (
+            {CompanyNavbarNavigation.map((item) => (
                 <Disclosure.Button
                  key={item.name}
                  as={Link}
@@ -168,4 +169,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default CompanyNavbar

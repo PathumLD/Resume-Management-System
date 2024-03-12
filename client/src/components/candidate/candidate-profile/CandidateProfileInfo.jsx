@@ -7,26 +7,9 @@ import { FiEdit3 } from "react-icons/fi";
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 
-
-
-
 const CandidateProfileInfo = () => {
-  
-
-  // Get the data of candidate by
-  // id from the URL
-
-  const candidateToken = localStorage.getItem('candidateToken');
-  const userType = localStorage.getItem('userType');
-  const candidateId = localStorage.getItem('candidateId');
-
-
-  console.log('userType:', userType);
-  console.log('candidateToken:', candidateToken);
-
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-    
 
   const openPopup = () => {
     setIsPopupOpen(true);
@@ -37,29 +20,21 @@ const CandidateProfileInfo = () => {
   };
 
   const [candidate, setCandidate] = useState(null);
-  console.log('candidate:', candidateId);
-  
-   
+  const candidateToken = localStorage.getItem('candidateToken');
+  const userType = localStorage.getItem('userType');
+
   useEffect(() => {
-    const getCandidateProfile = async (clientId) => {
+    const getCandidateProfile = async () => {
       try {
-
-        // const decodedToken = jwt.decode(candidateToken);
-        // const clientId = decodedToken.id;
-        
-        if (userType === 'candidate' && candidateId) {
-          // Make a GET request to the backend API endpoint with the candidate's ID
-          const response = await Axios.get(`http://localhost:3000/v1/candidate/getById/${candidateId}`, {
-
+        if (userType === 'candidate' && candidateToken) {
+          const response = await Axios.get('http://localhost:3000/v1/candidate/getById/65ed92236fbe0ecad2975a6d', {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('candidateToken')}`,
+              Authorization: `Bearer ${candidateToken}`,
               'Content-Type': 'application/json',
             },
           });
 
           if (response.status === 200) {
-            const candidate = response.data.candidate;
-            console.log('Candidate details:', candidate);
             setCandidate(response.data.candidate);
           } else {
             console.error('Failed to fetch candidate profile');
@@ -71,9 +46,13 @@ const CandidateProfileInfo = () => {
         console.error('Error fetching candidate profile:', error);
       }
     };
-  
+
     getCandidateProfile();
-  }, [candidateId, userType, candidateToken]); // Empty dependency array ensures the effect runs only once
+  }, [candidateToken, userType]);
+
+
+
+  
  
   
   return (

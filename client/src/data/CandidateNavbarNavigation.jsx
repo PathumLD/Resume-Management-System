@@ -15,7 +15,7 @@ import {
     FiUsers
 } from 'react-icons/fi'
 
-export const CandidateSidebarNavigation = [
+export const CandidateNavbarNavigation = [
 
     // {
     //     key: 'dashboard',
