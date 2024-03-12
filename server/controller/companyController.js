@@ -67,9 +67,9 @@ export const updateCompany = async (req, res) => {
         }
 
         //check if company exist
-        const companyId = req.params.id;
-        console.log("CompanyId :",companyId)
-        const company = await Company.findById({_id: companyId, client: clientId });
+        // const companyId = req.params.id;
+        // console.log("CompanyId :",companyId)
+        const company = await Company.findOne({ client: clientId }); //_id: companyId,
         if (!company) {
             return res.status(404).json({ 
                 message: 'Company not found' 
@@ -84,8 +84,8 @@ export const updateCompany = async (req, res) => {
             })
         }
 
-        const updatedCompany = await Company.findByIdAndUpdate(
-            {_id: companyId, client: clientId}, 
+        const updatedCompany = await Company.findOneAndUpdate(
+            { client: clientId}, //_id: companyId,
             { 
                 contact,
                 address,
@@ -136,12 +136,12 @@ export const getAllCompany = async (req, res) => {
 export const getCompanyById = async (req, res) => {
     try {
         
-        const companyId = req.params.id;
+        // const companyId = req.params.id;
         const clientId = req.client.id
-        console.log("company Id :",companyId, "client Id :", clientId) ;
-        console.log("Company Id :",companyId);
+        console.log( "client Id :", clientId) ; //"company Id :",companyId,
+        // console.log("Company Id :",companyId);
 
-        const company = await Company.findById({_id: companyId, client: clientId});
+        const company = await Company.findOne({ client: clientId}); //_id: companyId,
         if (!company) {
             return res.status(404).json({ 
                 message: 'Company not found' 
@@ -181,9 +181,9 @@ export const deleteCompany = async (req, res) => {
         }
 
         // Check if company exist
-        const companyId = req.params.id;
-        console.log("CompanyId :",companyId)
-        const company = await Company.findById({_id: companyId, client: clientId });
+        // const companyId = req.params.id;
+        // console.log("CompanyId :",companyId)
+        const company = await Company.findOne({ client: clientId }); //_id: companyId,
         if (!company) {
             return res.status(404).json({
                 success: false,
@@ -200,7 +200,7 @@ export const deleteCompany = async (req, res) => {
         }
 
         //Delete company
-        company.companyStatus = 'active';
+        company.companyStatus = 'deleted';
 
         await company.save();
 

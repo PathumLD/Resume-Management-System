@@ -8,16 +8,16 @@ const companyRouter = express.Router();
 companyRouter.post('/create-company',authenticateClient, createCompany);
 
 //Update Company
-companyRouter.put('/update-company/:id',authenticateClient, updateCompany);
+companyRouter.put('/update-company/:clientId',authenticateClient, updateCompany);
 
 // Get All Companies
 companyRouter.get('/getAllCompanies', getAllCompany);
 
 // Get Company by ID
-companyRouter.get('/getCompanyById/:id', authenticateClient, getCompanyById);
+companyRouter.get('/getCompanyById/:clientId', authenticateClient, getCompanyById);
 
 //Delete Company
-companyRouter.put('/delete-company/:id', authenticateClient, deleteCompany);
+companyRouter.put('/delete-company/:clientId', authenticateClient, deleteCompany);
 
 
 

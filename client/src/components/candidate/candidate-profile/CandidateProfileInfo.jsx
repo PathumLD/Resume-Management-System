@@ -49,7 +49,7 @@ const CandidateProfileInfo = () => {
         
         if (userType === 'candidate' && candidateId) {
           // Make a GET request to the backend API endpoint with the candidate's ID
-          const response = await Axios.get(`http://localhost:3000/v1/candidate/getById/65eef6c2b32838b3d257361b`, {
+          const response = await Axios.get(`http://localhost:3000/v1/candidate/getById/${candidateId}`, {
 
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('candidateToken')}`,

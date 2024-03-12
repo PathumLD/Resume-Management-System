@@ -10,16 +10,16 @@ const candidateRouter = Express.Router();
 candidateRouter.post('/create', authenticateClient, createCandidate);
 
 // Update Candidate
-candidateRouter.put('/update/:id', authenticateClient, updateCandidate);
+candidateRouter.put('/update/:clientId', authenticateClient, updateCandidate);
 
 //Get all candidates
 candidateRouter.get('/getAll', getAllCandidate);
 
 //Get candidate by ID
-candidateRouter.get('/getById/:id',authenticateClient, getCandidateById);
+candidateRouter.get('/getById/:clientId',authenticateClient, getCandidateById);
 
 //Delete candidate
-candidateRouter.put('/delete/:id', authenticateClient, deleteCandidate);
+candidateRouter.put('/delete/:clientId', authenticateClient, deleteCandidate);
 
 
 export default candidateRouter;

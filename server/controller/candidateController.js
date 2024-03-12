@@ -71,9 +71,9 @@ export const updateCandidate = async (req, res) => {
         }
 
         //check if candidate exist
-        const candidateId = req.params.id;
-        console.log("Candidate Id :",candidateId)
-        const candidate = await Candidate.findById({ _id: candidateId, client: clientId });
+        // const candidateId = req.params.id;
+        // console.log("Candidate Id :",candidateId)
+        const candidate = await Candidate.findOne({ client: clientId });
         if (!candidate) {
             return res.status(404).json({
                 message: 'Candidate not found'
@@ -82,13 +82,15 @@ export const updateCandidate = async (req, res) => {
 
         //Verify that the candidate ID from the URL matches the candidate ID in the JWT token
         if (clientId !== String(candidate.client)) {
-            return res.status(403).json({ message: 'Forbidden: You do not have permission to update this candidate' });
+            return res.status(403).json({ 
+                message: 'Forbidden: You do not have permission to update this candidate' 
+            });
           }
 
           //Update the candidate
 
           const updateCandidate = await Candidate.findOneAndUpdate(
-            { _id: candidateId, client: clientId },
+            {  client: clientId }, //_id: candidateId,
             {
               bio,
               contact,
@@ -141,12 +143,12 @@ export const getCandidateById = async (req, res) => {
 
     try {
 
-        const candidateId = req.params.id;
+        // const candidateId = req.params.id;
         const clientId = req.client.id;
 
-        console.log("candidate Id :",candidateId, "client Id :", clientId) ;
-        console.log("Candidate Id :",candidateId)
-        const candidate = await Candidate.findOne({ _id: candidateId, client: clientId });
+        console.log( "client Id :", clientId) ; //"candidate Id :",candidateId,
+        // console.log("Candidate Id :",candidateId)
+        const candidate = await Candidate.findOne({ client: clientId }); // _id: candidateId,
         // const candidate = await Candidate.findById(candidateId);
         if (!candidate) {
             return res.status(404).json({
@@ -187,9 +189,9 @@ export const deleteCandidate = async (req, res) => {
         }
 
         //check if candidate exist
-        const candidateId = req.params.id;
-        console.log("Candidate Id :",candidateId)
-        const candidate = await Candidate.findById({ _id: candidateId, client: clientId });
+        // const candidateId = req.params.id;
+        // console.log("Candidate Id :",candidateId)
+        const candidate = await Candidate.findOne({ client: clientId });
         if (!candidate) {
             return res.status(404).json({
                 message: 'Candidate not found'

@@ -11,21 +11,37 @@ import CandidateProfile from './pages/candidate/CandidateProfile'
 import CandidateSidebar from './components/shared/candidate/CandidateSidebar'
 
 
+
+// const Layout = ({ children }) => {
+//   return (
+//     <div className="flex flex-row w-full h-[55rem] overflow-hidden sm:flex-row">
+//       <div className="w-64 ">
+//         <CandidateSidebar />
+//       </div>
+//       <div className="flex flex-col flex-grow overflow-hidden">
+//         <Navbar />
+//         <div className="grid flex-grow p-4 overflow-auto grid-col-6">
+//           {children}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
 const Layout = ({ children }) => {
-  return (
-    <div className="flex flex-row w-full h-[55rem] overflow-hidden sm:flex-row">
-      <div className="w-64 ">
-        <CandidateSidebar />
-      </div>
-      <div className="flex flex-col flex-grow overflow-hidden">
+    return (
+      <>
+      <div className='flex flex-col'>
+      <div className=' w-full fixed'>
         <Navbar />
-        <div className="grid flex-grow p-4 overflow-auto grid-col-6">
-          {children}
-        </div>
       </div>
-    </div>
-  );
-};
+      <div className='mt-20'> 
+        {children}
+      </div>
+      </div>
+      </>
+    );
+  };
 
 
 
