@@ -4,50 +4,21 @@ import { HiCheck,HiX } from "react-icons/hi";
 
 const CompanyProfileInfo = () => {
 
-    const [bioEditing, setBioEditing] = useState(false);
-    const [linkedinEditing, setLinkedinEditing] = useState(false);
-    const [githubEditing, setGithubEditing] = useState(false);
-    const [websiteEditing, setWebsiteEditing] = useState(false);
+  const [company, setCompany] = useState(null);
+  const companyToken = localStorage.getItem('companyToken');
+  const userType = localStorage.getItem('userType');
 
-    const handleEditStart = (section) => {
-        switch (section) {
-          case 'bio':
-            setBioEditing(true);
-            break;
-          case 'linkedin':
-            setLinkedinEditing(true);
-            break;
-          case 'github':
-            setGithubEditing(true);
-            break;
-          case 'website':
-            setWebsiteEditing(true);
-            break;
-          // Add more cases for other sections if needed
-          default:
-            break;
-        }
-      };
-    
-      const handleEditEnd = (section) => {
-        switch (section) {
-          case 'bio':
-            setBioEditing(false);
-            break;
-          case 'linkedin':
-            setLinkedinEditing(false);
-            break;
-          case 'github':
-            setGithubEditing(false);
-            break;
-          case 'website':
-            setWebsiteEditing(false);
-            break;
-          // Add more cases for other sections if needed
-          default:
-            break;
-        }
-      };
+  // useEffect(() => {
+  //   const getCompanyProfile = async () => {
+  //     try {
+  //       if (userType === 'company' && companyToken) {
+  //         const response = await Axios.get('http://localhost:3000/v1/company/getById/65ed92236fbe0ecad2975a6d', {
+            
+  //         })
+  //       }
+  //     }
+  //   }
+  // })
 
   return (
     <>
@@ -65,105 +36,46 @@ const CompanyProfileInfo = () => {
       <div className='mx-4 my-6 '>
         
 
-        <div className='flex flex-col items-start mt-4 '>
-        <label htmlFor="bio" className='font-medium text-blue-text'>
-          Description
-        </label>
-        <div
-          id="bio"
-          name="bio"
-          className='p-2 text-justify rounded-md text-md text-primary-text'
-          contentEditable={true}
-          onClick={() => handleEditStart('bio')}
-          onBlur={() => handleEditEnd('bio')}
-          dangerouslySetInnerHTML={{
-            __html:
-              'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborumnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium',
-          }}
-        />
+      <div className='flex flex-col items-start mt-4'>
+          <label htmlFor="description" className='font-medium text-blue-text'>
+            Company Description
+          </label>
+          <div
+            id="description"
+            name="description"
+            className='p-2 text-justify rounded-md text-md text-primary-text'
+            dangerouslySetInnerHTML={{
+              __html: company?.description || 'No description available',
+            }}
+          />
+        </div>
 
-        {bioEditing && (
-          <div className='flex items-center gap-6 mt-1 ml-auto'>
-            <HiCheck className='m-2 text-xl rounded-full hover:bg-green-600 hover:text-white' />
-            <HiX className='m-2 text-xl rounded-full hover:bg-red-600 hover:text-white' />
+        <div className='flex flex-col items-start mt-4'>
+          <label htmlFor="linkedin" className='font-medium text-blue-text'>
+            Your Linkedin
+          </label>
+          <div
+            id="linkedin"
+            name="linkedin"
+            className='p-2 text-justify rounded-md text-md text-primary-text'
+          >
+            {company?.linkedin || 'No Linkedin available'}
           </div>
-        )}
-      </div>
+        </div>
 
-      <div className='flex flex-col items-start mt-4 '>
-        <label htmlFor="linkedin" className='font-medium text-blue-text'>
-          Linkedin
-        </label>
-        <div
-          id="linkedin"
-          name="linkedin"
-          className='p-2 text-justify rounded-md text-md text-primary-text'
-          contentEditable={true}
-          onClick={() => handleEditStart('linkedin')}
-          onBlur={() => handleEditEnd('linkedin')}
-          dangerouslySetInnerHTML={{
-            __html:
-              'www.linkedin.com/PathumLD',
-          }}
-        />
 
-        {linkedinEditing && (
-          <div className='flex items-center gap-6 mt-1 ml-auto'>
-            <HiCheck className='m-2 text-xl rounded-full hover:bg-green-600 hover:text-white' />
-            <HiX className='m-2 text-xl rounded-full hover:bg-red-600 hover:text-white' />
+        <div className='flex flex-col items-start mt-4'>
+          <label htmlFor="website" className='font-medium text-blue-text'>
+            Company Website
+          </label>
+          <div
+            id="website"
+            name="website"
+            className='p-2 text-justify rounded-md text-md text-primary-text'
+          >
+            {company?.website || 'No website available'}
           </div>
-        )}
-      </div>
-
-      {/* <div className='flex flex-col items-start mt-4 '>
-        <label htmlFor="github" className='font-medium text-blue-text'>
-          Your Github
-        </label>
-        <div
-          id="github"
-          name="github"
-          className='p-2 text-justify rounded-md text-md text-primary-text'
-          contentEditable={true}
-          onClick={() => handleEditStart('github')}
-          onBlur={() => handleEditEnd('github')}
-          dangerouslySetInnerHTML={{
-            __html:
-              'github.io/PathumLD',
-          }}
-        />
-
-        {githubEditing && (
-          <div className='flex items-center gap-6 mt-1 ml-auto'>
-            <HiCheck className='m-2 text-xl rounded-full hover:bg-green-600 hover:text-white' />
-            <HiX className='m-2 text-xl rounded-full hover:bg-red-600 hover:text-white' />
-          </div>
-        )}
-      </div> */}
-
-      <div className='flex flex-col items-start mt-4 '>
-        <label htmlFor="website" className='font-medium text-blue-text'>
-          Company Website
-        </label>
-        <div
-          id="website"
-          name="website"
-          className='p-2 text-justify rounded-md text-md text-primary-text'
-          contentEditable={true}
-          onClick={() => handleEditStart('website')}
-          onBlur={() => handleEditEnd('website')}
-          dangerouslySetInnerHTML={{
-            __html:
-              'www.mywebsite.com',
-          }}
-        />
-
-        {websiteEditing && (
-          <div className='flex items-center gap-6 mt-1 ml-auto'>
-            <HiCheck className='m-2 text-xl rounded-full hover:bg-green-600 hover:text-white' />
-            <HiX className='m-2 text-xl rounded-full hover:bg-red-600 hover:text-white' />
-          </div>
-        )}
-      </div>
+        </div>
 
         
         

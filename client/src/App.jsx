@@ -20,21 +20,41 @@ import CompanyNavbar from './components/shared/company/CompanyNavbar'
 
 const userType = localStorage.getItem('userType')
 
-const Layout = ({ children }) => {
-    return (
-      <>
-      <div className='flex flex-col'>
-      <div className=' w-full fixed'>
-        {userType === 'candidate' ? <Navbar /> : <CompanyNavbar />}
+// const Layout = ({ children }) => {
+//     return (
+//       <>
+//       <div className='flex flex-col'>
+//       <div className='fixed w-full '>
+//         {userType === 'candidate' ? <Navbar /> : userType === 'company' ? <CompanyNavbar /> : null}
         
+//       </div>
+//       <div className='mt-20'> 
+//         {children}
+//       </div>
+//       </div>
+//       </>
+//     );
+//   };
+
+
+const Layout = ({ children }) => {
+  const client = localStorage.getItem('client')
+    ? JSON.parse(localStorage.getItem('client'))
+    : null;
+
+    const userType = client ? client.userType : null;
+
+  return (
+    <>
+      <div className='flex flex-col'>
+        <div className='fixed w-full '>
+          {userType === 'candidate' ? <Navbar /> : userType === 'company' ? <CompanyNavbar /> : null}
+        </div>
+        <div className='mt-20'>{children}</div>
       </div>
-      <div className='mt-20'> 
-        {children}
-      </div>
-      </div>
-      </>
-    );
-  };
+    </>
+  );
+};
 
 
 function App() {
@@ -47,10 +67,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
-        {userType === 'candidate' ? (
+        if (userType === 'candidate') {
         <>
              {/* Candidate */}
-        <Route path="/candidate" element={<Layout><CandidateProfile /></Layout>} />
+        <Route path="/candidate/*" element={<Layout><CandidateProfile /></Layout>} />
         <Route path="/candidate/applied-vacancies" element={<Layout><CandidateAppliedVacancies /></Layout>} />
         <Route path="/candidate/interviews" element={<Layout><CandidateInterviews /></Layout>} />
         <Route path="/candidate/all-vacancies" element={<Layout><CandidateAllVacancies /></Layout>} />
@@ -58,13 +78,13 @@ function App() {
         <Route path="/candidate/events" element={<Layout><CandidateEvents /></Layout>} />
         </>
 
-        ) : (
+        } else if (userType === 'company') {
 
         <>
               {/* Company */}
-        <Route path="/company" element={<Layout><CompanyProfile /></Layout>} />
+        <Route path="/company/*" element={<Layout><CompanyProfile /></Layout>} />
         </>
-        )}
+        }
 
       </Routes>
     </>

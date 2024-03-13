@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { FaGoogle, FaFacebookF, FaLinkedinIn } from 'react-icons/fa6';
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
@@ -7,7 +7,7 @@ import Axios from 'axios';
 const Login = () => {
     const navigate = useNavigate();
     const loginAPI = 'http://localhost:3000/v1/auth/login';
-    
+
 
     const [formData, setFormData] = useState({
         email: '',
@@ -36,25 +36,34 @@ const Login = () => {
           const data = await response.data;
           console.log('data:', data);
 
-            if (response.status === 200) {
-                console.log('Login successful');
-                // localStorage.setItem('userType', 'candidate'); // or 'company'
-                localStorage.setItem('candidateToken', response.data.token);
-                
-                localStorage.setItem('candidate', JSON.stringify(response.data.client));
+          if (response.status === 200) {
+            console.log('Login successful');
+            // Store token in localStorage
+            localStorage.setItem('clientToken', data.token);
 
-                // Set user type in local storage
-                localStorage.setItem('userType', data.userType);
 
-                const userType = response.data.client.userType;
-                console.log('userType:', userType);
+            // Check for userType in the response data
+            if (data.client && data.client.userType) {
+              const userType = data.client.userType; // Assuming userType is nested in client object
 
-                // Navigate based on user type
-                if (userType === 'candidate') {
-                  navigate('/candidate');
+              // Store userType in localStorage
+              localStorage.setItem('userType', userType);
+              console.log('userType:', userType);
+
+              // Navigate based on userType
+              if (userType === 'candidate') {
+                navigate('/candidate');
               } else if (userType === 'company') {
-                  navigate('/company');
+                navigate('/company');
+              } else {
+                console.error('Invalid userType:', userType);
+                // Handle unexpected userType
               }
+            } else {
+              console.error('Missing userType in response data');
+              // Handle missing userType scenario (e.g., display an error message)
+            }
+
                 
             } else {
                 console.error('Login failed');
@@ -111,18 +120,6 @@ const Login = () => {
                 Sign In
               </button>
             </div>
-          
-
-          {/* {user && (
-            <div className="flex justify-center font-semibold text-red-500 hover:underline ">
-              <span>{user.email}</span>
-              <button onClick={handleLogout}>Logout</button>
-            </div>
-            
-
-          )} */}
-          
-          
          
 
           <hr className='my-4' />
