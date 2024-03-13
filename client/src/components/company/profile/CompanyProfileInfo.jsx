@@ -1,24 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import dp from '../../../assets/LandingImage.jpg';
-import { HiCheck,HiX } from "react-icons/hi";
+import Axios from 'axios';
 
 const CompanyProfileInfo = () => {
 
   const [company, setCompany] = useState(null);
-  const companyToken = localStorage.getItem('companyToken');
+  const companyToken = localStorage.getItem('clientToken');
   const userType = localStorage.getItem('userType');
 
-  // useEffect(() => {
-  //   const getCompanyProfile = async () => {
-  //     try {
-  //       if (userType === 'company' && companyToken) {
-  //         const response = await Axios.get('http://localhost:3000/v1/company/getById/65ed92236fbe0ecad2975a6d', {
-            
-  //         })
-  //       }
-  //     }
-  //   }
-  // })
+  useEffect(() => {
+    const getCompanyProfile = async () => {
+      try {
+        if (userType === 'company' && companyToken) {
+          const response = await Axios.get(`http://localhost:3000/v1/company/getCompanyById/${companyToken}`, {
+            headers: {
+              Authorization: `Bearer ${companyToken}`,
+              'Content-Type': 'application/json',
+            },
+          });
+
+          if (response.status === 200) {
+            setCompany(response.data.company);
+          } else {
+            console.error('Failed to fetch company profile');
+          } 
+        } else {
+          console.error('Invalid userType or missing companyToken');
+        }
+      } catch (error) {
+        console.error('Error fetching company profile:', error);
+      }
+    };
+
+    // Call the API when component mount
+    getCompanyProfile();
+  }, [companyToken, userType]);
 
   return (
     <>
@@ -28,8 +44,9 @@ const CompanyProfileInfo = () => {
         <img src={dp} alt="candidate profile" className='mt-4 ' />
       </div>
     </div>
-    <h1 className='mt-6 text-3xl font-bold text-center lg:mt-8 md:mt-12 text-blue'>Boffo Systems Labs</h1>
-    <h1 className='text-xl font-medium text-center text-blue'>6 Temple Rd, Sri Jayawardenepura Kotte 11222</h1>
+    <h1 className='mt-6 text-3xl font-bold text-center lg:mt-8 text-blue'>{company && company.companyName}</h1>
+    <h1 className='text-xl font-medium text-center text-blue'>{company && company.address}</h1>
+    <h1 className='font-medium text-center text-md text-blue'>{company && company.location}</h1>
     </div>
 
     <div className=''>

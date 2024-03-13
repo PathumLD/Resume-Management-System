@@ -1,5 +1,5 @@
 import React from 'react'
-import { talents } from '../../Data/TalentList';
+import { talents } from '../../data/TalentList'
 
 function TalentCard({ talents }) {
   return (

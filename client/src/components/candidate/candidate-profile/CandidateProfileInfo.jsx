@@ -20,16 +20,16 @@ const CandidateProfileInfo = () => {
   };
 
   const [candidate, setCandidate] = useState(null);
-  const clientToken = localStorage.getItem('clientToken');
+  const candidateToken = localStorage.getItem('clientToken');
   const userType = localStorage.getItem('userType');
 
   useEffect(() => {
     const getCandidateProfile = async () => {
       try {
-        if (userType === 'candidate' && clientToken) {
-          const response = await Axios.get(`http://localhost:3000/v1/candidate/getById/${clientToken}`, {
+        if (userType === 'candidate' && candidateToken) {
+          const response = await Axios.get(`http://localhost:3000/v1/candidate/getById/${candidateToken}`, {
             headers: {
-              Authorization: `Bearer ${clientToken}`,
+              Authorization: `Bearer ${candidateToken}`,
               'Content-Type': 'application/json',
             },
           });
@@ -48,7 +48,7 @@ const CandidateProfileInfo = () => {
     };
 
     getCandidateProfile();
-  }, [clientToken, userType]);
+  }, [candidateToken, userType]);
 
 
 

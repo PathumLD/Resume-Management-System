@@ -21,7 +21,7 @@ const CompanyNavbar = () => {
   const location = useLocation();
   
   const handleLogout = async () => {
-    localStorage.removeItem('candidateToken')
+    localStorage.removeItem('clientToken')
     navigate('/login')
   }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { EventList } from '../../Data/EventList'
+import { EventList } from '../../data/EventList';
 
 function EventCard({ CompanyEvents }) {
   return (

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import LandingPage from './pages/LandingPage'
 import Register from './pages/Register'
 import Login from './pages/Login'
@@ -16,13 +16,22 @@ import CandidateCompanies from './pages/candidate/CandidateCompanies'
 import CandidateEvents from './pages/candidate/CandidateEvents'
 import CompanyProfile from './pages/company/CompanyProfile'
 import CompanyNavbar from './components/shared/company/CompanyNavbar'
+import CompanyInterviews from './pages/company/CompanyInterviews'
+import CompanyEvents from './pages/company/CompanyEvents'
+import CompanyTalentPool from './pages/company/CompanyTalentPool'
 
 
 
 
 const Layout = ({ children }) => {
-
   const userType = localStorage.getItem('userType');
+  const client = localStorage.getItem('clientToken')
+
+
+  if (!client) {
+    return <Navigate to="/login" replace />;
+  }
+ 
     return (
       <>
       <div className='flex flex-col'>
@@ -30,7 +39,7 @@ const Layout = ({ children }) => {
         {userType === 'candidate' ? <Navbar /> : userType === 'company' ? <CompanyNavbar /> : null}
         
       </div>
-      <div className='mt-20'> 
+      <div className='w-5/6 mx-auto mt-20'> 
         {children}
       </div>
       </div>
@@ -63,6 +72,9 @@ function App() {
         <>
               {/* Company */}
         <Route path="/company/*" element={<Layout><CompanyProfile /></Layout>} />
+        <Route path="/company/interviews" element={<Layout><CompanyInterviews /></Layout>} />
+        <Route path="/company/events" element={<Layout><CompanyEvents /></Layout>} />
+        <Route path="/company/talent-pool" element={<Layout><CompanyTalentPool /></Layout>} />
         </>
         
 
