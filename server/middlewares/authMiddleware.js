@@ -1,4 +1,3 @@
-import { clientLogin } from '../controller/authController.js';
 import { verifyToken } from '../utils/jwtUtils.js';
 
 export const authenticateClient = async (req, res, next) => {
@@ -16,6 +15,7 @@ export const authenticateClient = async (req, res, next) => {
         const decodedToken = verifyToken(token);
         console.log('decodedToken', decodedToken);
         console.log("userType :", decodedToken.userType);
+        console.log("Client Id", decodedToken.id);
 
         if (!decodedToken) 
         return res.status(401).json({

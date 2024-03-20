@@ -47,6 +47,9 @@ const candidateSchema = new mongoose.Schema({
   jobType: {
     type: String,
   },
+  timePeriod: {
+    type: String,
+  },
   workplace: [{
     type: String,
   }],
@@ -59,6 +62,15 @@ const candidateSchema = new mongoose.Schema({
   skills: [{
     type: String,
   }],
+  projectName : {
+    type: String,
+  },
+  technologies : {
+    type: String,
+  },
+  projectDetails : {
+    type: String,
+  },
   profileImage: {
     type: String, // You can store the image URL or use another approach based on your requirements.
   },

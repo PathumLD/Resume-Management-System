@@ -49,7 +49,7 @@ const companySchema = new mongoose.Schema({
     },
     jobPosts: [{ 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Job' 
+        ref: 'Jobs' 
     }],
     companyStatus: { 
         type: String, 

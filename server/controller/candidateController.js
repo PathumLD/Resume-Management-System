@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 export const createCandidate = async (req, res) => {
     try {
 
-        const { bio, contact, address, linkedin, github, website, jobTitle, jobType, workplace, degree, university, skills } = req.body;
+        const { bio, contact, address, linkedin, github, website, jobTitle, jobType,timePeriod, workplace, degree, university, skills } = req.body;
 
         // Fetch the client to get the email and password
         const clientId = req.client.id
@@ -33,6 +33,7 @@ export const createCandidate = async (req, res) => {
             website,
             jobTitle,
             jobType,
+            timePeriod,
             workplace,
             degree,
             university,
@@ -58,7 +59,7 @@ export const createCandidate = async (req, res) => {
 // Update Candidate
 export const updateCandidate = async (req, res) => {
     try {
-        const { bio, contact, address, linkedin, github, website, jobTitle, jobType, workplace, degree, university, skills } = req.body;
+        const { bio, contact, address, linkedin, github, website, jobTitle, jobType,timePeriod, workplace, degree, university, skills } = req.body;
 
         const clientId = req.client.id
         
@@ -100,6 +101,7 @@ export const updateCandidate = async (req, res) => {
               website,
               jobTitle,
               jobType,
+              timePeriod,
               workplace,
               degree,
               university,

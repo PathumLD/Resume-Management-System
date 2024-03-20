@@ -19,6 +19,7 @@ import CompanyNavbar from './components/shared/company/CompanyNavbar'
 import CompanyInterviews from './pages/company/CompanyInterviews'
 import CompanyEvents from './pages/company/CompanyEvents'
 import CompanyTalentPool from './pages/company/CompanyTalentPool'
+import CandidateEditProfile from './pages/candidate/CandidateEditProfile'
 
 
 
@@ -67,6 +68,7 @@ function App() {
         <Route path="/candidate/all-vacancies" element={<Layout><CandidateAllVacancies /></Layout>} />
         <Route path="/candidate/companies" element={<Layout><CandidateCompanies /></Layout>} />
         <Route path="/candidate/events" element={<Layout><CandidateEvents /></Layout>} />
+        <Route path="/candidate/update-profile" element={<Layout><CandidateEditProfile /></Layout>} />
         </>
 
         <>
