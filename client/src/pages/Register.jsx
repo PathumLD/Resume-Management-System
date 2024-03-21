@@ -25,33 +25,28 @@ const Register = () => {
     };
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        
-
-        try {
-
-            const response = await Axios.post(registerAPI, formData, {
-              headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({name, email, password, confirmPassword, userType}),
-          })
-          const data = await response.json()
-
-            if (response.status === 201) {
-                console.log('Registration successful', response.data);
-                localStorage.setItem('client', JSON.stringify(data))
-                navigate('/login');
-            } else {
-                console.error('Registration failed');
-            }
-            
-            
-        } catch (error) {
-            console.error('Error during registration', error);
+      event.preventDefault();
+    
+      try {
+        const { name, email, password, confirmPassword, userType } = formData;
+    
+        const response = await Axios.post(registerAPI, { name, email, password, userType }, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+    
+        if (response.status === 201) {
+          console.log('Registration successful', response.data);
+          localStorage.setItem('client', JSON.stringify(response.data));
+          navigate('/login');
+        } else {
+          console.error('Registration failed');
         }
-    }
+      } catch (error) {
+        console.error('Error during registration', error);
+      }
+    };
 
     
     

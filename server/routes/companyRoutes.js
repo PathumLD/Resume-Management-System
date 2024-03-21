@@ -5,10 +5,10 @@ import { authenticateClient } from '../middlewares/authMiddleware.js';
 const companyRouter = express.Router();
 
 //Create Company
-companyRouter.post('/create-company',authenticateClient, createCompany);
+companyRouter.put('/create',authenticateClient, createCompany);
 
 //Update Company
-companyRouter.put('/update-company/:clientId',authenticateClient, updateCompany);
+companyRouter.put('/update/:clientId',authenticateClient, updateCompany);
 
 // Get All Companies
 companyRouter.get('/getAllCompanies', getAllCompany);

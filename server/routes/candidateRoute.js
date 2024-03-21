@@ -7,7 +7,7 @@ const candidateRouter = Express.Router();
 
 
 // Create Candidate
-candidateRouter.post('/create', authenticateClient, createCandidate);
+candidateRouter.put('/create', authenticateClient, createCandidate);
 
 // Update Candidate
 candidateRouter.put('/update/:clientId', authenticateClient, updateCandidate);

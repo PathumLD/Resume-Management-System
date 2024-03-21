@@ -6,9 +6,14 @@ const companySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Client',
       },
+    identifier: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     companyName: { 
         type: String, 
-        required: true 
+        required: true,
     },
     email: { 
         type: String, 

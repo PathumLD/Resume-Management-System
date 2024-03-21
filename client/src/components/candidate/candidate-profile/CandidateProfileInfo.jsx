@@ -125,7 +125,7 @@ const CandidateProfileInfo = () => {
           <div className='mx-4 my-6 '>
             <div className='flex justify-between mt-4'>
               <h3 className='text-xl font-bold text-primary-text'>Basic Details</h3>
-              <button onClick={openBasicDetailsEditPopup}><FiEdit3 className='text-xl rounded-full text-black/50 hover:ring-2 ring-offset-2 ring-blue-text/75 hover:text-blue-text'/></button>
+              <button className='' onClick={openBasicDetailsEditPopup}><FiEdit3 className='text-xl rounded-full text-black/50 hover:ring-2 ring-offset-2 ring-blue-text/75 hover:text-blue-text'/></button>
             </div>
             <Popup isOpen={isBasicDetailsEditPopupOpen} closePopup={closeBasicDetailsEditPopup} title="Update Basic Details">
               <EditBasicDetails />

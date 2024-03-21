@@ -1,36 +1,40 @@
 import mongoose from 'mongoose';
 import Client from '../models/clientModel.js';
 import Company from '../models/companyModel.js';
+import { nanoid } from 'nanoid';
 
 // Create Company
 export const createCompany = async (req, res) => {
-
     try {
+        const { address, location, contact, description, linkedin, website } = req.body;
+        const clientId = req.client.id;
 
-        const { contact, address,location, description, linkedin, github, website } = req.body;
+        // Generate a unique identifier for the company
+        const identifier = nanoid();
 
-        // Fetch the client to get the email and password
-        const clientId = req.client.id
-
+        // Assuming the client email and password are used for the company as well
         const client = await Client.findById(clientId);
-        console.log("clientId : ", clientId)
         if (!client) {
-            return res.status(404).json({
-                message: 'Client not found'
-            })
+            return res.status(404).json({ message: 'Client not found' });
+        }
+
+        // Check if a company with the same email or companyName already exists
+        const existingCompany = await Company.findOne({ $or: [{ email: client.email }, { companyName: client.name }] });
+        if (existingCompany) {
+            return res.status(400).json({ message: 'Company with the same email or name already exists' });
         }
 
         const company = new Company({
+            identifier,
             client: clientId,
             companyName: client.name,
             email: client.email,
             password: client.password,
-            contact,
             address,
             location,
+            contact,
             description,
             linkedin,
-            github,
             website,
         });
 
@@ -39,15 +43,14 @@ export const createCompany = async (req, res) => {
             success: true,
             message: 'Company created successfully',
             company,
-        })
-        
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ 
-            message: 'Server error' 
         });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
     }
 };
+
+
 
 
 // Update Company

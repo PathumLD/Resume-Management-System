@@ -19,9 +19,7 @@ const AddPopup = ({ isOpen, closePopup, title, children }) => {
           <div className="p-6">
             {children}
           </div>
-          <div className="justify-center px-4 py-3 bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse">
-            <button className="px-4 py-3 font-medium text-white rounded-xl hover:opacity-85 bg-blue">Save</button>
-          </div>
+          
         </div>
       </div>
     </div>

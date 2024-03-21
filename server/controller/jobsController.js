@@ -133,27 +133,25 @@ export const getAllJobs = async (req, res) => {
 
 // Get Jobs by Company
 export const getJobsByCompany = async (req, res) => {
-    const { clientId } = req.params; // Extract the clientId from the URL parameters
+  const { clientId } = req.params;
 
-    try {
-        // Find the company by its clientId
-        const company = await Company.findOne({ client: clientId });
-        if (!company) {
-            return res.status(404).json({ message: 'Company not found' });
-        }
-
-        // Find all jobs associated with the company
-        const jobs = await Jobs.find({ company: company._id });
-
-        res.status(200).json({ 
-            success: true, 
-            message: 'Jobs retrieved successfully', 
-            jobs 
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+  try {
+    // Find the company by its clientId
+    const company = await Company.findOne({ client: clientId });
+    if (!company) {
+      return res.status(404).json({ message: 'Company not found' });
     }
+
+    const companyId = company._id;
+
+    // Find all jobs associated with the company
+    const jobs = await Jobs.find({ company: companyId }).populate('company', 'companyName');
+
+    res.status(200).json({ success: true, message: 'Jobs retrieved successfully', jobs });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 };
 
 

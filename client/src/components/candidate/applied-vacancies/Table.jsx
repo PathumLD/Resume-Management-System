@@ -1,6 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
 
 const Table = () => {
+    const [formDate, setFormDate] = useState([
+        {
+            workplace: '',
+            jobTitle: '',
+            cv: '',
+            status: '',
+        }
+    ]);
+    
   return (
     <>
       <section className="w-full mx-auto mt-2 ">
@@ -41,7 +51,7 @@ const Table = () => {
 
                             <td class="px-4 py-4 text-sm sm:text-base text-center text-primary-text  whitespace-nowrap">
                                 <div class=" items-center gap-x-2 flex-col flex justify-center">
-                                    <img class="object-cover  w-20 h-12 " src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                                   
                                     <div>
                                         <h2 class="text-sm sm:text-base font-medium text-gray-800  ">Boffo System Labs</h2>
                                         
