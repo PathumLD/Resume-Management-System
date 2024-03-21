@@ -13,48 +13,52 @@ export const createJobs = async (req, res) => {
         jobDescription,
         jobLocation,
         jobSalary,
-        jobDeadline,
+        jobRequirements,
+        jobResponsibilities
     } = req.body;
 
     try {
         // Extract clientId from the decoded token
-        const clientId = req.params.id;
+        const clientId = req.client.id;
+        console.log("Client ID:", clientId);
 
         // Find the company associated with the clientId
         const company = await Company.findOne({ client: clientId });
+        console.log("Company:", company); // Log the company found (or not found)
+
         if (!company) {
             return res.status(404).json({ message: 'Company not found' });
         }
 
         // Create a new job and associate it with the company
-        const jobs = new Jobs({
+        const job = new Jobs({
             jobTitle,
             jobType,
             jobDescription,
             jobLocation,
             jobSalary,
-            jobDeadline,
+            jobRequirements,
+            jobResponsibilities,
             company: company._id, // Use the company's ObjectId
         });
 
-        await jobs.save();
+        await job.save();
 
-        // Optional: Update company's `jobPosts` array
-        if (company.jobPosts) {
-            company.jobPosts.push(jobs._id);
-            await company.save();
-        }
+        // Update company's `jobPosts` array
+        company.jobPosts.push(job._id);
+        await company.save();
 
         res.status(201).json({ 
             success: true, 
-            message: 'Jobs created successfully', 
-            jobs 
+            message: 'Job created successfully', 
+            job 
         });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 };
+
 
 
 //Update Jobs
@@ -69,7 +73,8 @@ export const updateJobs = async (req, res) => {
         jobDescription,
         jobLocation,
         jobSalary,
-        jobDeadline,
+        jobRequirements,
+        jobResponsibilities,
     } = req.body;
 
     try {
@@ -99,7 +104,8 @@ export const updateJobs = async (req, res) => {
         job.jobDescription = jobDescription || job.jobDescription;
         job.jobLocation = jobLocation || job.jobLocation;
         job.jobSalary = jobSalary || job.jobSalary;
-        job.jobDeadline = jobDeadline || job.jobDeadline;
+        job.jobRequirements = jobRequirements || job.jobRequirements;
+        job.jobResponsibilities = jobResponsibilities || job.jobResponsibilities;
 
         await job.save();
 
@@ -203,7 +209,7 @@ export const deleteJobs = async (req, res) => {
             return res.status(403).json({ message: 'Forbidden: You do not have permission to delete this job' });
         }
 
-        job.jobStatus = "open";
+        job.jobStatus = "Open";
         await job.save();
 
         res.status(200).json({ 

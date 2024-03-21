@@ -22,13 +22,17 @@ const jobsSchema = new mongoose.Schema({
         type: String, 
         required: true 
     },
-    jobDeadline: { 
+    jobRequirements: { 
+        type: String, 
+        required: true 
+    },
+    jobResponsibilities: { 
         type: String, 
         required: true 
     },
     jobStatus: {
         type: String,
-        default: "open",
+        default: "Open",
     },
     company: {
         type: mongoose.Schema.Types.ObjectId,
