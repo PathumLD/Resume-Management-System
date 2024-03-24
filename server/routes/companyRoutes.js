@@ -1,5 +1,5 @@
 import express from 'express';
-import { createCompany, deleteCompany, getAllCompany, getCompanyById, updateCompany } from '../controller/companyController.js';
+import { createCompany, deleteCompany, getAllCompany, getCompanyByClientId, getCompanyById, updateCompany } from '../controller/companyController.js';
 import { authenticateClient } from '../middlewares/authMiddleware.js';
 
 const companyRouter = express.Router();
@@ -14,7 +14,10 @@ companyRouter.put('/update/:clientId',authenticateClient, updateCompany);
 companyRouter.get('/getAllCompanies', getAllCompany);
 
 // Get Company by ID
-companyRouter.get('/getCompanyById/:clientId', authenticateClient, getCompanyById);
+companyRouter.get('/getCompanyById/:companyId',  getCompanyById);
+
+// Get Company by clientID
+companyRouter.get('/getCompanyByClientId/:clientId', authenticateClient, getCompanyByClientId);
 
 //Delete Company
 companyRouter.put('/delete-company/:clientId', authenticateClient, deleteCompany);

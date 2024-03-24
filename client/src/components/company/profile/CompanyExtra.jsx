@@ -7,6 +7,8 @@ const CompanyExtra = () => {
   const [jobs, setJobs] = useState([]);
   const [isVacancyAddPopupOpen, setIsVacancyAddPopupOpen] = useState(false);
   const companyToken = localStorage.getItem('clientToken');
+  const userType = localStorage.getItem('userType');
+  const clientId = localStorage.getItem('clientId');
   
   const openVacancyAddPopup = () => {
     setIsVacancyAddPopupOpen(true);
@@ -16,28 +18,28 @@ const CompanyExtra = () => {
   };
 
   const fetchJobs = async () => {
+    // Ensure clientId is correctly retrieved from localStorage and used in the function
+    const clientId = localStorage.getItem('clientId'); // This assumes you've stored the company ID as 'clientId'
+  
     try {
-      
+      const response = await Axios.get(`http://localhost:3000/v1/jobs/getJobsByCompany/65ff2d7853ed2f94983f3b12`, {
+        headers: {
+          Authorization: `Bearer ${companyToken}`,
+        },
+      });
   
-        // Fetch job posts associated with the company using companyId
-        const jobsResponse = await Axios.get(`http://localhost:3000/v1/jobs/getJobsByCompany/65fb04a57539e663e6bc1ea4`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('clientToken')}`,
-          },
-        });
-  
-        if (jobsResponse.status === 200) {
-          // Filter jobs with status === 'open'
-        const openJobs = jobsResponse.data.jobs.filter(job => job.jobStatus === 'open' || job.jobStatus === 'Open');
+      if (response.status === 200) {
+        const openJobs = response.data.jobs.filter(job => job.jobStatus === 'Open');
         setJobs(openJobs);
-        } else {
-          console.error('Failed to fetch job posts');
-        }
-      
+      } else {
+        console.error('Failed to fetch job posts');
+      }
     } catch (error) {
       console.error('Error fetching company data:', error);
     }
   };
+  
+
 
   useEffect(() => {
     fetchJobs();

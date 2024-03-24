@@ -42,7 +42,7 @@ const AddVacancy = () => {
             console.error('Invalid userType or missing companyToken');
           }
         } catch (error) {
-          console.error('Error adding education:', error);
+          console.error('Error adding Job:', error);
         }
       };
     

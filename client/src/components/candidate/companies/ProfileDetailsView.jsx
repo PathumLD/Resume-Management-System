@@ -1,52 +1,27 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import dp from '../../../assets/LandingImage.jpg';
-import Axios from 'axios';
-import EditCompanyDetails from './EditCompanyDetails';
-import { FiEdit3 } from 'react-icons/fi';
-import Popup from '../../candidate/candidate-profile/EditPopups';
 
-const CompanyProfileInfo = () => {
-  const [isCompanyDetailsEditPopupOpen, setIsCompanyDetailsEditPopupOpen] = useState(false);
-  
-  const openCompanyDetailsEditPopup = () => {
-    setIsCompanyDetailsEditPopupOpen(true);
-  };
+const ProfileDetailsView = () => {
 
-  const closeCompanyDetailsEditPopup = () => {
-    setIsCompanyDetailsEditPopupOpen(false);
-  };
-
-  const [company, setCompany] = useState(null);
-  const companyToken = localStorage.getItem('clientToken');
-  const userType = localStorage.getItem('userType');
+    const { companyId } = useParams();
+    const [company, setCompany] = useState(null);
 
   useEffect(() => {
-    const getCompanyProfile = async () => {
+    const fetchCompany = async () => {
       try {
-        if (userType === 'company' && companyToken) {
-          const response = await Axios.get(`http://localhost:3000/v1/company/getCompanyByClientId/${companyToken}`, {
-            headers: {
-              Authorization: `Bearer ${companyToken}`,
-              'Content-Type': 'application/json',
-            },
-          });
-
-          if (response.status === 200) {
-            setCompany(response.data.company);
-          } else {
-            console.error('Failed to fetch company profile');
-          } 
-        } else {
-          console.error('Invalid userType or missing companyToken');
-        }
+        const response = await axios.get(`http://localhost:3000/v1/company/getCompanyById/${companyId}`);
+        setCompany(response.data.company);
       } catch (error) {
-        console.error('Error fetching company profile:', error);
+        console.error("Failed to fetch company details:", error);
       }
     };
 
-    // Call the API when component mount
-    getCompanyProfile();
-  }, [companyToken, userType]);
+    if (companyId) {
+      fetchCompany();
+    }
+  }, [companyId]);
 
   return (
     <>
@@ -66,11 +41,11 @@ const CompanyProfileInfo = () => {
       <div className='mx-4 my-6 '>
       <div className='flex justify-between mt-4'>
       <h3 className='text-xl font-bold text-primary-text'>Basic Details</h3>
-      <button className='' onClick={openCompanyDetailsEditPopup}><FiEdit3 className='text-xl rounded-full text-black/50 hover:ring-2 ring-offset-2 ring-blue-text/75 hover:text-blue-text'/></button>
+      {/* <button className='' onClick={openCompanyDetailsEditPopup}><FiEdit3 className='text-xl rounded-full text-black/50 hover:ring-2 ring-offset-2 ring-blue-text/75 hover:text-blue-text'/></button> */}
     </div>
-    <Popup isOpen={isCompanyDetailsEditPopupOpen} closePopup={closeCompanyDetailsEditPopup} title="Update Basic Details">
+    {/* <Popup isOpen={isCompanyDetailsEditPopupOpen} closePopup={closeCompanyDetailsEditPopup} title="Update Basic Details">
       <EditCompanyDetails />
-    </Popup>
+    </Popup> */}
         
 
       <div className='flex flex-col items-start mt-4'>
@@ -123,4 +98,4 @@ const CompanyProfileInfo = () => {
   )
 }
 
-export default CompanyProfileInfo
+export default ProfileDetailsView

@@ -139,26 +139,28 @@ export const getAllJobs = async (req, res) => {
 
 // Get Jobs by Company
 export const getJobsByCompany = async (req, res) => {
-  const { clientId } = req.params;
-
-  try {
-    // Find the company by its clientId
-    const company = await Company.findOne({ client: clientId });
-    if (!company) {
-      return res.status(404).json({ message: 'Company not found' });
+    const { clientId } = req.params;
+  
+    try {
+      // Find the company by its clientId
+      const company = await Company.findOne({ client: clientId });
+      if (!company) {
+        return res.status(404).json({ message: 'Company not found' });
+      }
+  
+      const companyId = company._id;
+  
+      // Find all jobs associated with the company
+      const jobs = await Jobs.find({ company: companyId }).populate('company', 'companyName');
+  
+      res.status(200).json({ success: true, message: 'Jobs retrieved successfully', jobs });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
     }
+  };
 
-    const companyId = company._id;
-
-    // Find all jobs associated with the company
-    const jobs = await Jobs.find({ company: companyId }).populate('company', 'companyName');
-
-    res.status(200).json({ success: true, message: 'Jobs retrieved successfully', jobs });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-};
+  
 
 
 // Get Jobs by Id
@@ -209,7 +211,7 @@ export const deleteJobs = async (req, res) => {
             return res.status(403).json({ message: 'Forbidden: You do not have permission to delete this job' });
         }
 
-        job.jobStatus = "Open";
+        job.jobStatus = "Close";
         await job.save();
 
         res.status(200).json({ 

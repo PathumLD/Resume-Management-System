@@ -138,6 +138,34 @@ export const getAllCompany = async (req, res) => {
 // Get Company by ID
 export const getCompanyById = async (req, res) => {
     try {
+        const companyId = req.params.companyId; // Use companyId from URL
+        
+        console.log("Company Id :", companyId);
+
+        const company = await Company.findById(companyId); // Use findById mongoose method
+        if (!company) {
+            return res.status(404).json({ 
+                message: 'Company not found' 
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Company found successfully',
+            company,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ 
+            message: 'Server error' 
+        });
+    }
+};
+
+
+// Get Company by clientID
+export const getCompanyByClientId = async (req, res) => {
+    try {
         
         // const companyId = req.params.id;
         const clientId = req.client.id
@@ -165,6 +193,7 @@ export const getCompanyById = async (req, res) => {
         });
     }
 };
+
 
 
 // Delete Company

@@ -2,7 +2,7 @@ import express from 'express';
 import authRouter from './authRoutes.js';
 import candidateRouter from './candidateRoute.js';
 import companyRouter from './companyRoutes.js';
-import jobsRouter from './jobsROute.js';
+import jobsRouter from './jobsRoute.js';
 
 const mainRouter = express.Router();
 

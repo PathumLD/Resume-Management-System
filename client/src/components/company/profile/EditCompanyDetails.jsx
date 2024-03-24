@@ -26,7 +26,7 @@ const EditCompanyDetails = () => {
         const fetchCompanyData = async () => {
             try {
                 if (userType === 'company' && companyToken) {
-                    const response = await Axios.get(`http://localhost:3000/v1/company/getCompanyById/${companyToken}`, {
+                    const response = await Axios.get(`http://localhost:3000/v1/company/getCompanyByClientId/${companyToken}`, {
                         headers: {
                             Authorization: `Bearer ${companyToken}`,
                         },
