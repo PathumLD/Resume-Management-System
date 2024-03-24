@@ -14,7 +14,7 @@ jobsRouter.put('/update-job/:jobId', authenticateClient, updateJobs);
 jobsRouter.get('/all-jobs', getAllJobs);
 
 // Get Jobs by Company
-jobsRouter.get('/getJobsByCompany/:clientId',authenticateClient, getJobsByCompany);
+jobsRouter.get('/getJobsByCompany/:companyId', getJobsByCompany);
 
 // Get Jobs by Id
 jobsRouter.get('/getJobById/:jobId', getJobById);

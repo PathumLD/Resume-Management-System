@@ -1,6 +1,6 @@
 import React from 'react'
-import CompanyExtra from '../../components/company/profile/CompanyExtra'
 import ProfileDetailsView from '../../components/candidate/companies/ProfileDetailsView'
+import VacancyDetailsView from '../../components/candidate/companies/VacancyDetailsView'
 
 const CandidateCompanyView = () => {
   return (
@@ -10,7 +10,7 @@ const CandidateCompanyView = () => {
             <ProfileDetailsView />
         </div>
         <div className='col-span-1 mb-10 overflow-hidden'>
-            <CompanyExtra />
+            <VacancyDetailsView />
         </div>
       </div>
     </>

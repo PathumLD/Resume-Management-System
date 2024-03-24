@@ -76,15 +76,15 @@ const CompanyExtra = () => {
   return (
     <>
       <div className="flex items-center justify-between mt-10 ">
-    <h2 className="mb-6 ml-6 text-lg font-semibold sm:ml-10 sm:text-xl md:text-2xl">Current Vacancy Details</h2>
-    <button className="p-2 font-medium text-green-500 border-2 hover:border-green-500 rounded-xl hover:text-green-600 text-md" onClick={openVacancyAddPopup}>
-      New Vacancy
-    </button>
-  </div>
-  <AddPopup isOpen={isVacancyAddPopupOpen} closePopup={closeVacancyAddPopup} title="Add Vacancy">
-    <AddVacancy />
-  </AddPopup>
-  <table className="min-w-full mt-4 text-sm text-center bg-white divide-y-2 divide-gray-200">
+        <h2 className="mb-6 ml-6 text-lg font-semibold sm:ml-10 sm:text-xl md:text-2xl">Current Vacancy Details</h2>
+        <button className="p-2 font-medium text-green-500 border-2 hover:border-green-500 rounded-xl hover:text-green-600 text-md" onClick={openVacancyAddPopup}>
+          New Vacancy
+        </button>
+      </div>
+      <AddPopup isOpen={isVacancyAddPopupOpen} closePopup={closeVacancyAddPopup} title="Add Vacancy">
+        <AddVacancy />
+      </AddPopup>
+      <table className="min-w-full mt-4 text-sm text-center bg-white divide-y-2 divide-gray-200">
           <thead className="ltr:text-left rtl:text-right">
             <tr>
               <th className="px-4 py-2 text-lg font-medium text-gray-900 whitespace-nowrap">Job Title</th>

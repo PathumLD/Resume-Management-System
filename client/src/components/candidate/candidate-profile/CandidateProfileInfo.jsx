@@ -146,64 +146,64 @@ const CandidateProfileInfo = () => {
             </div>
 
             <div className='flex flex-col items-start mt-4'>
-  <label htmlFor="linkedin" className='font-medium text-blue-text'>
-    Your Linkedin
-  </label>
-  {candidate?.linkedin ? (
-    <a
-      href={candidate.linkedin}
-      target="_blank"
-      rel="noopener noreferrer"
-      className='p-2 text-justify rounded-md text-md text-primary-text'
-    >
-      {candidate.linkedin}
-    </a>
-  ) : (
-    <div className='p-2 text-justify rounded-md text-md text-primary-text'>
-      No Linkedin available
-    </div>
-  )}
-</div>
+              <label htmlFor="linkedin" className='font-medium text-blue-text'>
+                Your Linkedin
+              </label>
+              {candidate?.linkedin ? (
+                <a
+                  href={candidate.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className='p-2 text-justify rounded-md text-md text-primary-text'
+                >
+                  {candidate.linkedin}
+                </a>
+              ) : (
+                <div className='p-2 text-justify rounded-md text-md text-primary-text'>
+                  No Linkedin available
+                </div>
+              )}
+            </div>
 
-<div className='flex flex-col items-start mt-4'>
-  <label htmlFor="github" className='font-medium text-blue-text'>
-    Your Github
-  </label>
-  {candidate?.github ? (
-    <a
-      href={candidate.github}
-      target="_blank"
-      rel="noopener noreferrer"
-      className='p-2 text-justify rounded-md text-md text-primary-text'
-    >
-      {candidate.github}
-    </a>
-  ) : (
-    <div className='p-2 text-justify rounded-md text-md text-primary-text'>
-      No Github available
-    </div>
-  )}
-</div>
+            <div className='flex flex-col items-start mt-4'>
+              <label htmlFor="github" className='font-medium text-blue-text'>
+                Your Github
+              </label>
+              {candidate?.github ? (
+                <a
+                  href={candidate.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className='p-2 text-justify rounded-md text-md text-primary-text'
+                >
+                  {candidate.github}
+                </a>
+              ) : (
+                <div className='p-2 text-justify rounded-md text-md text-primary-text'>
+                  No Github available
+                </div>
+              )}
+            </div>
 
-<div className='flex flex-col items-start mt-4'>
-  <label htmlFor="website" className='font-medium text-blue-text'>
-    Your Website
-  </label>
-  {candidate?.website ? (
-    <a
-      href={candidate.website}
-      target="_blank"
-      rel="noopener noreferrer"
-      className='p-2 text-justify rounded-md text-md text-primary-text'
-    >
-      {candidate.website}
-    </a>
-  ) : (
-    <div className='p-2 text-justify rounded-md text-md text-primary-text'>
-      No website available
-    </div>
-  )}
-</div>
+            <div className='flex flex-col items-start mt-4'>
+              <label htmlFor="website" className='font-medium text-blue-text'>
+                Your Website
+              </label>
+              {candidate?.website ? (
+                <a
+                  href={candidate.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className='p-2 text-justify rounded-md text-md text-primary-text'
+                >
+                  {candidate.website}
+                </a>
+              ) : (
+                <div className='p-2 text-justify rounded-md text-md text-primary-text'>
+                  No website available
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

@@ -41,11 +41,7 @@ const ProfileDetailsView = () => {
       <div className='mx-4 my-6 '>
       <div className='flex justify-between mt-4'>
       <h3 className='text-xl font-bold text-primary-text'>Basic Details</h3>
-      {/* <button className='' onClick={openCompanyDetailsEditPopup}><FiEdit3 className='text-xl rounded-full text-black/50 hover:ring-2 ring-offset-2 ring-blue-text/75 hover:text-blue-text'/></button> */}
     </div>
-    {/* <Popup isOpen={isCompanyDetailsEditPopupOpen} closePopup={closeCompanyDetailsEditPopup} title="Update Basic Details">
-      <EditCompanyDetails />
-    </Popup> */}
         
 
       <div className='flex flex-col items-start mt-4'>
@@ -63,31 +59,45 @@ const ProfileDetailsView = () => {
         </div>
 
         <div className='flex flex-col items-start mt-4'>
-          <label htmlFor="linkedin" className='font-medium text-blue-text'>
-            Your Linkedin
-          </label>
-          <div
-            id="linkedin"
-            name="linkedin"
-            className='p-2 text-justify rounded-md text-md text-primary-text'
-          >
-            {company?.linkedin || 'No Linkedin available'}
-          </div>
-        </div>
+              <label htmlFor="linkedin" className='font-medium text-blue-text'>
+                Your Linkedin
+              </label>
+              {company?.linkedin ? (
+                <a
+                  href={company.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className='p-2 text-justify rounded-md text-md hover:text-blue text-primary-text'
+                >
+                  {company.linkedin}
+                </a>
+              ) : (
+                <div className='p-2 text-justify rounded-md text-md text-primary-text'>
+                  No Linkedin available
+                </div>
+              )}
+            </div>
 
 
-        <div className='flex flex-col items-start mt-4'>
-          <label htmlFor="website" className='font-medium text-blue-text'>
-            Company Website
-          </label>
-          <div
-            id="website"
-            name="website"
-            className='p-2 text-justify rounded-md text-md text-primary-text'
-          >
-            {company?.website || 'No website available'}
-          </div>
-        </div>
+            <div className='flex flex-col items-start mt-4'>
+              <label htmlFor="website" className='font-medium text-blue-text'>
+                Your Website
+              </label>
+              {company?.website ? (
+                <a
+                  href={company.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className='p-2 text-justify rounded-md text-md text-primary-text hover:text-blue'
+                >
+                  {company.website}
+                </a>
+              ) : (
+                <div className='p-2 text-justify rounded-md text-md text-primary-text'>
+                  No website available
+                </div>
+              )}
+            </div>
 
         
         

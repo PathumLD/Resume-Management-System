@@ -34,6 +34,10 @@ const jobsSchema = new mongoose.Schema({
         type: String,
         default: "Open",
     },
+    applyStatus: {
+        type: String,
+        default: "Not Applied",
+    },
     company: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Company"
