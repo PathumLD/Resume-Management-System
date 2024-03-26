@@ -18,6 +18,10 @@ const clientSchema = new mongoose.Schema({
     userType: { 
         type: String, 
         required: true,
+    },
+    clientStatus: { 
+        type: String, 
+        default: 'active' 
     }
 });
 

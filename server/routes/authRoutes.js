@@ -1,5 +1,5 @@
 import express from 'express';
-import { clientLogin, clientLogout, clientRegister, updateClient } from '../controller/authController.js';
+import { clientLogin, clientLogout, clientRegister, getAllActiveCandidates, getAllActiveCompanies, updateClient } from '../controller/authController.js';
 import { authenticateClient } from '../middlewares/authMiddleware.js';
 
 const authRouter = express.Router();
@@ -15,5 +15,11 @@ authRouter.put('/update/:id',authenticateClient, updateClient);
 
 //Client Logout
 authRouter.post('/logout', authenticateClient, clientLogout);
+
+//Get All Candidates
+authRouter.get('/active-candidates', getAllActiveCandidates);
+
+//Get All Companies
+authRouter.get('/active-companies', getAllActiveCompanies);
 
 export default authRouter;

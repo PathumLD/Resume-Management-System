@@ -169,3 +169,30 @@ export const clientLogout = async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 };
+
+
+// Get All Active Candidates
+export const getAllActiveCandidates = async (req, res) => {
+    try {
+        // Assuming userType and candidateStatus are fields in your Client model
+        const candidates = await Client.find({ userType: "candidate", clientStatus: "active" });
+        res.status(200).json(candidates);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+};
+
+
+// Get All Active Companies
+export const getAllActiveCompanies = async (req, res) => {
+    try {
+        // Assuming userType and companyStatus are fields in your Client model
+        const companies = await Client.find({ userType: "company", clientStatus: "active" });
+        res.status(200).json(companies);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+};
+

@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
         {userType === 'candidate' ? <Navbar /> : userType === 'company' ? <CompanyNavbar /> : null}
         
       </div>
-      <div className='w-5/6 mx-auto mt-20'> 
+      <div className='w-5/6 mx-auto mt-20 '> 
         {children}
       </div>
       </div>

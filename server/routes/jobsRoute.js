@@ -1,6 +1,6 @@
 import express from 'express';
 import { authenticateClient } from '../middlewares/authMiddleware.js';
-import { applyJob, createJobs, deleteJobs, getAllJobs, getJobById, getJobsByCompany, updateJobs } from '../controller/jobsController.js';
+import { applyJob, cancelApplication, createJobs, deleteJobs, getAllActiveVacancies, getAllJobs, getJobById, getJobsByCompany, updateJobs } from '../controller/jobsController.js';
 
 const jobsRouter = express.Router();
 
@@ -24,6 +24,12 @@ jobsRouter.put('/delete-job/:jobId', authenticateClient, deleteJobs);
 
 // Apply for a job
 jobsRouter.put('/apply-for-job/:jobId', authenticateClient, applyJob);
+
+//Get All Active Jobs
+jobsRouter.get('/active-jobs', getAllActiveVacancies);
+
+//Cancel Application
+jobsRouter.put('/cancel-application/:jobId', authenticateClient, cancelApplication);
 
 
 export default jobsRouter;

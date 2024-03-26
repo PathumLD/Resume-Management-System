@@ -18,7 +18,7 @@ const Table = () => {
             <div className="inline-block min-w-full py-2 align-middle ">
                 <div className="overflow-hidden rounded-t-xl">
                 {/* Scrollable Table Body */}
-                <div className="overflow-y-auto max-h-96">
+                <div className="overflow-x-auto max-h-[50rem]">
                     <table className="min-w-full divide-y divide-gray-200 ">
                     <thead className="bg-gray-50">
                         <tr className=''>
@@ -47,6 +47,7 @@ const Table = () => {
                     </thead>
 
                     <tbody class="bg-white divide-y divide-gray-200  ">
+                    
                         <tr>
 
                             <td class="px-4 py-4 text-sm sm:text-base text-center text-primary-text  whitespace-nowrap">
@@ -87,10 +88,7 @@ const Table = () => {
                                 </div>
                             </td>
 
-
                         </tr>
-
-                        
                         </tbody>
                     </table>
                 </div>

@@ -124,7 +124,7 @@ export const updateJobs = async (req, res) => {
 // Get all Jobs
 export const getAllJobs = async (req, res) => {
     try {
-        const jobs = await Jobs.find();
+        const jobs = await Jobs.find().populate('company', 'companyName');
         res.status(200).json({ 
             success: true, 
             message: 'Jobs fetched successfully', 
@@ -166,7 +166,7 @@ export const getJobById = async (req, res) => {
     console.log("JobId",jobId)
 
     try {
-        const job = await Jobs.findById(jobId);
+        const job = await Jobs.findById(jobId).populate('company', 'companyName');
         if (!job) {
             return res.status(404).json({ message: 'Job not found' });
         }
@@ -224,26 +224,94 @@ export const deleteJobs = async (req, res) => {
 
 // Apply for a job
 export const applyJob = async (req, res) => {
-
-    const { jobId} = req.params;
-    const { candidateName, candidateEmail, candidateResume } = req.body;
-
+    const { jobId } = req.params;
+    const clientId = req.client.id;
+  
     try {
-        const job = await Jobs.findById(jobId);
-        if (!job) {
-            return res.status(404).json({ message: 'Job not found' });
-        }
+      const candidate = await Candidate.findOne({ client: clientId });
+      if (!candidate) {
+        return res.status(404).json({ message: 'Candidate not found' });
+      }
+  
+      const job = await Jobs.findById(jobId);
+      if (!job) {
+        return res.status(404).json({ message: 'Job not found' });
+      }
+  
+      candidate.appliedJobs.push(job);
+      await candidate.save();
+  
+      job.appliedCandidates.push(candidate);
+      await job.save();
+  
+      res.status(200).json({ success: true, message: 'Applied for the job successfully', job });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
+  
+  
 
-        job.applications.push({ candidateName, candidateEmail, candidateResume });
-        await job.save();
-
-        res.status(200).json({ 
-            success: true, 
-            message: 'Job applied successfully', 
-        });
-
+  
+//Get All Active Vacancies
+export const getAllActiveVacancies = async (req, res) => {
+    try {
+        const vacancies = await Jobs.find({ jobStatus: "Open" });
+        res.status(200).json(vacancies);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 };
+
+
+//Cancel Application
+export const cancelApplication = async (req, res) => {
+    try {
+      const { jobId } = req.params;
+      const candidateId = req.client.id; // Using optional chaining to handle undefined
+  
+      if (!candidateId) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+  
+      // Find the job by ID
+      const job = await Jobs.findById(jobId);
+      if (!job) {
+        return res.status(404).json({ error: 'Job not found' });
+      }
+  
+      // Remove the candidate data from the job
+      const candidateIndex = job.appliedCandidates.findIndex(
+        (candidate) => candidate._id.toString() === candidateId
+      );
+      if (candidateIndex === -1) {
+        return res.status(404).json({ error: 'Candidate not found in job applicants' });
+      }
+  
+      job.appliedCandidates.splice(candidateIndex, 1);
+      await job.save();
+  
+      // Remove the job data from the candidate
+      const candidate = await Candidate.findById(candidateId);
+      if (!candidate) {
+        return res.status(404).json({ error: 'Candidate not found' });
+      }
+  
+      const jobIndex = candidate.appliedJobs.findIndex(
+        (appliedJob) => appliedJob.toString() === jobId
+      );
+      if (jobIndex === -1) {
+        return res.status(404).json({ error: 'Job not found in candidate applications' });
+      }
+  
+      candidate.appliedJobs.splice(jobIndex, 1);
+      await candidate.save();
+  
+      res.sendStatus(200);
+    } catch (error) {
+      console.error('Error cancelling application:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };

@@ -42,10 +42,10 @@ const jobsSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Company"
     },
-    candidate: {
+    appliedCandidates: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Candidate"
-    },
+        ref: 'Candidate'
+    }]
 });
 
 const Jobs = mongoose.model('Jobs', jobsSchema);

@@ -152,13 +152,10 @@ export const getCandidateById = async (req, res) => {
 
     try {
 
-        // const candidateId = req.params.id;
         const clientId = req.client.id;
 
-        console.log( "client Id :", clientId) ; //"candidate Id :",candidateId,
-        // console.log("Candidate Id :",candidateId)
-        const candidate = await Candidate.findOne({ client: clientId }); // _id: candidateId,
-        // const candidate = await Candidate.findById(candidateId);
+        console.log( "client Id :", clientId) ; 
+        const candidate = await Candidate.findOne({ client: clientId }); 
         if (!candidate) {
             return res.status(404).json({
                 message: 'Candidate not found'
@@ -231,3 +228,35 @@ export const deleteCandidate = async (req, res) => {
     }
 
 };
+
+
+//Get Jobs by appliedCandidates
+// export const getCandidateById = async (req, res) => {
+//     try {
+//         const clientId = req.client.id;
+
+//         const candidate = await Candidate.findOne({ client: clientId }).populate('appliedJobs'); // Populate appliedJobs field
+
+//         if (!candidate) {
+//             return res.status(404).json({
+//                 message: 'Candidate not found'
+//             });
+//         }
+
+//         // Extract job details from appliedJobs
+//         const appliedJobsDetails = await Job.find({ _id: { $in: candidate.appliedJobs } });
+
+//         res.status(200).json({
+//             success: true,
+//             message: 'Candidate found successfully',
+//             candidate,
+//             appliedJobsDetails
+//         });
+        
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ 
+//             message: 'Server error' 
+//         });
+//     }
+// };
