@@ -11,7 +11,7 @@ const CandidateAllVacancies = () => {
         <DetailsCard />
       </div>
       <div className='flex flex-wrap justify-center mt-4 lg:mt-6 lg:mx-10 gap-x-4 gap-y-2'>
-        <SearchBar />
+        {/* <SearchBar /> */}
       </div>
       <div className='mt-4 overflow-x-auto bg-white rounded-lg shadow-lg lg:mt-6'>
         <JobsTable />

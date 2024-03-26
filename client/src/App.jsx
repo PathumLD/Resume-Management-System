@@ -21,6 +21,8 @@ import CompanyEvents from './pages/company/CompanyEvents'
 import CompanyTalentPool from './pages/company/CompanyTalentPool'
 import CandidateEditProfile from './pages/candidate/CandidateEditProfile'
 import CandidateCompanyView from './pages/candidate/CandidateCompanyView'
+import CompanyCandidates from './pages/company/CompanyCandidates'
+import CompanyCandidateView from './pages/company/CompanyCandidateView'
 
 
 
@@ -77,6 +79,8 @@ function App() {
               {/* Company */}
         <Route path="/company/*" element={<Layout><CompanyProfile /></Layout>} />
         <Route path="/company/interviews" element={<Layout><CompanyInterviews /></Layout>} />
+        <Route path="/company/candidates" element={<Layout><CompanyCandidates /></Layout>} />
+        <Route path="/company/candidate-profile/:candidateId" element={<Layout><CompanyCandidateView /></Layout>} />
         <Route path="/company/events" element={<Layout><CompanyEvents /></Layout>} />
         <Route path="/company/talent-pool" element={<Layout><CompanyTalentPool /></Layout>} />
         </>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ViewPopup from './ViewPopup';
 import ViewJobDetails from './ViewJobDetails';
+import { Axios } from 'axios';
 
 const JobsTable = () => {
   const [jobs, setJobs] = useState([]);
@@ -22,6 +23,26 @@ const JobsTable = () => {
       .then(data => setJobs(data.jobs))
       .catch(error => console.error('Error fetching jobs:', error));
   }, []);
+
+  const handleApplyForJob = async (jobId) => {
+    try {
+      const candidateToken = localStorage.getItem('clientToken');
+      const response = await Axios.put(`http://localhost:3000/v1/jobs/apply-for-job/${jobId}`, null, {
+        headers: {
+          Authorization: `Bearer ${candidateToken}`,
+        },
+      });
+
+      if (response.status === 200) {
+        // Update the jobs state to mark the job as applied
+        setJobs(prevJobs => prevJobs.map(job => job._id === jobId ? { ...job, applied: true } : job));
+      } else {
+        console.error('Failed to apply for job');
+      }
+    } catch (error) {
+      console.error('Error applying for job:', error);
+    }
+  };
 
   return (
     <>
@@ -103,7 +124,7 @@ const JobsTable = () => {
                               <ViewJobDetails jobId={job._id} />
                             </ViewPopup>
 
-                            <button className="px-3 py-1 font-medium text-blue-500 transition-colors duration-200 border rounded-md hover:text-blue hover:border-blue focus:outline-none">
+                            <button onClick={() => handleApplyForJob(job._id)} className="px-3 py-1 font-medium text-blue-500 transition-colors duration-200 border rounded-md hover:text-blue hover:border-blue focus:outline-none">
                               Apply
                             </button>
                           </div>

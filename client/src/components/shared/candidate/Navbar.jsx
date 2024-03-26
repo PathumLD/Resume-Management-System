@@ -28,6 +28,10 @@ const Navbar = () => {
     navigate('/')
   }
 
+  const handleNavigateProfile = () => {
+    navigate('/candidate')
+  }
+
   
   return (
     <Disclosure as="nav" className="bg-gray-800 ">
@@ -110,6 +114,7 @@ const Navbar = () => {
                         {({ active }) => (
                           <a
                             href="#"
+                            onClick={handleNavigateProfile}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Your Profile

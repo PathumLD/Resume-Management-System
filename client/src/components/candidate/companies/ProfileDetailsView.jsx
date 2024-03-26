@@ -60,7 +60,7 @@ const ProfileDetailsView = () => {
 
         <div className='flex flex-col items-start mt-4'>
               <label htmlFor="linkedin" className='font-medium text-blue-text'>
-                Your Linkedin
+                Company Linkedin
               </label>
               {company?.linkedin ? (
                 <a
@@ -81,7 +81,7 @@ const ProfileDetailsView = () => {
 
             <div className='flex flex-col items-start mt-4'>
               <label htmlFor="website" className='font-medium text-blue-text'>
-                Your Website
+                Company Website
               </label>
               {company?.website ? (
                 <a

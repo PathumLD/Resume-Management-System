@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import Client from '../models/clientModel.js';
 import Company from '../models/companyModel.js';
 import { nanoid } from 'nanoid';
+import Candidate from '../models/candidateModel.js';
 
 // Create Company
 export const createCompany = async (req, res) => {
@@ -149,42 +150,52 @@ export const getCompanyById = async (req, res) => {
             });
         }
 
-        res.status(200).json({
-            success: true,
-            message: 'Company found successfully',
-            company,
-        });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ 
-            message: 'Server error' 
-        });
-    }
-};
-
-
-// Get Company by clientID
-export const getCompanyByClientId = async (req, res) => {
-    try {
-        
-        // const companyId = req.params.id;
-        const clientId = req.client.id
-        console.log( "client Id :", clientId) ; //"company Id :",companyId,
-        // console.log("Company Id :",companyId);
-
-        const company = await Company.findOne({ client: clientId}); //_id: companyId,
-        if (!company) {
-            return res.status(404).json({ 
-                message: 'Company not found' 
-            });
+        const candidateData = [];
+        for (const candidateId of company.appliedCandidates) {
+            const candidate = await Candidate.findById(candidateId);
+            if (candidate) {
+                candidateData.push(candidate);
+            }
         }
 
         res.status(200).json({
             success: true,
             message: 'Company found successfully',
             company,
+            candidates: candidateData,
         });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ 
+            message: 'Server error' 
+        });
+    }
+};
 
+
+
+// Get Company by clientID
+export const getCompanyByClientId = async (req, res) => {
+    try {
+        const clientId = req.client.id;
+        console.log("client Id :", clientId);
+
+        const company = await Company.findOne({ client: clientId }).populate('appliedCandidates');
+        if (!company) {
+            return res.status(404).json({ 
+                message: 'Company not found' 
+            });
+        }
+
+        // Extract candidate details from appliedCandidates
+        const candidateDetails = await Candidate.find({ _id: { $in: company.appliedCandidates } });
+
+        res.status(200).json({
+            success: true,
+            message: 'Company found successfully',
+            company,
+            candidateDetails
+        });
 
     } catch (error) {
         console.log(error);
@@ -193,6 +204,7 @@ export const getCompanyByClientId = async (req, res) => {
         });
     }
 };
+
 
 
 

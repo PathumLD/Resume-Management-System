@@ -1,13 +1,10 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-
 import dp from '../../../assets/dp.jpg'
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios'
-
 import { Link } from 'react-router-dom';
-import { CandidateNavbarNavigation } from '../../../data/CandidateNavbarNavigation';
 import { CompanyNavbarNavigation } from '../../../data/CompanyNavbarNavigation';
 
 
@@ -27,6 +24,10 @@ const CompanyNavbar = () => {
 
   const handleNavigate = () => {
     navigate('/')
+  }
+
+  const handleNavigateProfile = () => {
+    navigate('/company')
   }
 
   
@@ -111,6 +112,7 @@ const CompanyNavbar = () => {
                         {({ active }) => (
                           <a
                             href="#"
+                            onClick={handleNavigateProfile}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Your Profile

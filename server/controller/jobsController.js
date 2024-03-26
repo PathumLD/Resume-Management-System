@@ -237,6 +237,15 @@ export const applyJob = async (req, res) => {
       if (!job) {
         return res.status(404).json({ message: 'Job not found' });
       }
+
+      const company = await Company.findById(job.company);
+        if (!company) {
+            return res.status(404).json({ message: 'Company not found' });
+        }
+
+        // Add the candidate's id to the company's appliedCandidates array
+        company.appliedCandidates.push(candidate._id);
+        await company.save();
   
       candidate.appliedJobs.push(job);
       await candidate.save();
