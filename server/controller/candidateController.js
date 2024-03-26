@@ -1,6 +1,7 @@
 import Candidate from '../models/candidateModel.js';
 import Client from '../models/clientModel.js';
 import mongoose from 'mongoose';
+import Jobs from '../models/jobsModel.js';
 
 
 
@@ -149,24 +150,26 @@ export const getAllCandidate = async (req, res) => {
 
 // Get Candidate by ID
 export const getCandidateById = async (req, res) => {
-
     try {
-
         const clientId = req.client.id;
 
-        console.log( "client Id :", clientId) ; 
-        const candidate = await Candidate.findOne({ client: clientId }); 
+        const candidate = await Candidate.findOne({ client: clientId }).populate('appliedJobs'); // Populate appliedJobs field
+
         if (!candidate) {
             return res.status(404).json({
                 message: 'Candidate not found'
-            })
+            });
         }
 
+        // Extract job details from appliedJobs
+        const appliedJobsDetails = await Jobs.find({ _id: { $in: candidate.appliedJobs } });
+
         res.status(200).json({
-                success: true,
-                message: 'Candidate found successfully',
-                candidate
-            });
+            success: true,
+            message: 'Candidate found successfully',
+            candidate,
+            appliedJobsDetails
+        });
         
     } catch (error) {
         console.log(error);
@@ -174,7 +177,6 @@ export const getCandidateById = async (req, res) => {
             message: 'Server error' 
         });
     }
-
 };
 
 

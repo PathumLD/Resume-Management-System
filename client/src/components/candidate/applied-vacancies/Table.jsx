@@ -2,14 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 
 const Table = () => {
-    const [formDate, setFormDate] = useState([
-        {
-            workplace: '',
-            jobTitle: '',
-            cv: '',
-            status: '',
-        }
-    ]);
+    
     
   return (
     <>
