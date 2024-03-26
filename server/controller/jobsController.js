@@ -139,22 +139,21 @@ export const getAllJobs = async (req, res) => {
 
 // Get Jobs by Company
 export const getJobsByCompany = async (req, res) => {
-    const { companyId } = req.params; // Retrieve companyId from request parameters
-
+    const { companyId } = req.params;
+  
     try {
-        // Find all jobs associated with the company
-        const jobs = await Jobs.find({ company: companyId }).populate('company', 'companyName');
-    
-        if (!jobs) {
-          return res.status(404).json({ message: 'No jobs found for this company' });
-        }
-    
-        res.status(200).json({ success: true, message: 'Jobs retrieved successfully', jobs });
-      } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+      const jobs = await Jobs.find({ company: companyId }).populate('company', 'companyName');
+  
+      if (!jobs) {
+        return res.status(404).json({ message: 'No jobs found for this company' });
       }
-    };
+  
+      res.status(200).json({ success: true, message: 'Jobs retrieved successfully', jobs });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
 
 
   

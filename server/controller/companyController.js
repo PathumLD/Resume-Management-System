@@ -3,6 +3,7 @@ import Client from '../models/clientModel.js';
 import Company from '../models/companyModel.js';
 import { nanoid } from 'nanoid';
 import Candidate from '../models/candidateModel.js';
+import Jobs from '../models/jobsModel.js';
 
 // Create Company
 export const createCompany = async (req, res) => {
@@ -190,11 +191,18 @@ export const getCompanyByClientId = async (req, res) => {
         // Extract candidate details from appliedCandidates
         const candidateDetails = await Candidate.find({ _id: { $in: company.appliedCandidates } });
 
+        // Extract job IDs from the jobPosts field
+        const jobIds = company.jobPosts;
+
+        // Find jobs by the extracted job IDs
+        const jobs = await Jobs.find({ _id: { $in: jobIds } }).populate('company', 'companyName');
+
         res.status(200).json({
             success: true,
             message: 'Company found successfully',
             company,
-            candidateDetails
+            candidateDetails,
+            jobs
         });
 
     } catch (error) {

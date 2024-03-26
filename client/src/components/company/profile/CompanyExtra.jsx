@@ -6,44 +6,32 @@ import AddVacancy from '../../company/profile/AddVacancy';
 const CompanyExtra = () => {
   const [jobs, setJobs] = useState([]);
   const [isVacancyAddPopupOpen, setIsVacancyAddPopupOpen] = useState(false);
-  const companyToken = localStorage.getItem('clientToken');
-  const userType = localStorage.getItem('userType');
   const clientId = localStorage.getItem('clientId');
+  const companyToken = localStorage.getItem('clientToken'); // Make sure to get the companyToken
   
-  const openVacancyAddPopup = () => {
-    setIsVacancyAddPopupOpen(true);
-  };
-  const closeVacancyAddPopup = () => {
-    setIsVacancyAddPopupOpen(false);
-  };
-
-  const fetchJobs = async () => {
-    // Ensure clientId is correctly retrieved from localStorage and used in the function
-    const clientId = localStorage.getItem('clientId'); // This assumes you've stored the company ID as 'clientId'
-  
-    try {
-      const response = await Axios.get(`http://localhost:3000/v1/jobs/getJobsByCompany/65ff2d7853ed2f94983f3b12`, {
-        headers: {
-          Authorization: `Bearer ${companyToken}`,
-        },
-      });
-  
-      if (response.status === 200) {
-        const openJobs = response.data.jobs.filter(job => job.jobStatus === 'Open');
-        setJobs(openJobs);
-      } else {
-        console.error('Failed to fetch job posts');
-      }
-    } catch (error) {
-      console.error('Error fetching company data:', error);
-    }
-  };
-  
-
+ 
 
   useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await Axios.get(`http://localhost:3000/v1/company/getCompanyByClientId/${clientId}`, {
+          headers: {
+            Authorization: `Bearer ${companyToken}`,
+          },
+        });
+
+        if (response.status === 200 && response.data.jobs) {
+          setJobs(response.data.jobs);
+        } else {
+          console.error('Failed to fetch job posts');
+        }
+      } catch (error) {
+        console.error('Error fetching company data:', error);
+      }
+    };
+
     fetchJobs();
-  }, []);
+ }, [clientId, companyToken]);
 
 
   const handleBlockApplications = async (jobId) => {
@@ -77,13 +65,9 @@ const CompanyExtra = () => {
     <>
       <div className="flex items-center justify-between mt-10 ">
         <h2 className="mb-6 ml-6 text-lg font-semibold sm:ml-10 sm:text-xl md:text-2xl">Current Vacancy Details</h2>
-        <button className="p-2 font-medium text-green-500 border-2 hover:border-green-500 rounded-xl hover:text-green-600 text-md" onClick={openVacancyAddPopup}>
-          New Vacancy
-        </button>
+        
       </div>
-      <AddPopup isOpen={isVacancyAddPopupOpen} closePopup={closeVacancyAddPopup} title="Add Vacancy">
-        <AddVacancy />
-      </AddPopup>
+      
       <table className="min-w-full mt-4 text-sm text-center bg-white divide-y-2 divide-gray-200">
           <thead className="ltr:text-left rtl:text-right">
             <tr>
@@ -94,7 +78,7 @@ const CompanyExtra = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {jobs.map((job, index) => (
+          {jobs.filter(job => job.jobStatus === 'Open').map((job, index) => (
               <tr key={index}>
                 <td className="px-4 py-2 text-gray-700 whitespace-nowrap">{job.jobTitle}</td>
                 <td className="px-4 py-2 text-gray-700 whitespace-nowrap">{job.jobType}</td>
@@ -107,6 +91,7 @@ const CompanyExtra = () => {
               </tr>
             ))}
           </tbody>
+
         </table>
       
     </>
