@@ -281,7 +281,7 @@ const CandidateProfileInfo = () => {
         </div>
 
         {/* Skills */}
-        <div className='border-[#001A23]/50 border-b-2 '>
+        <div className=''>
           <div className='mx-4 my-6'>
             <div className='flex justify-between mt-4'>
               <h3 className='text-xl font-bold text-primary-text'>Skills</h3>

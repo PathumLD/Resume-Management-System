@@ -89,7 +89,7 @@ const JobsTable = () => {
                   </thead>
 
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {jobs.map((job, index) => (
+                    {jobs.filter(job => job.jobStatus === 'Open').map((job, index) => (
                       <tr key={job._id}>
                         <td className="px-4 py-4 text-sm font-medium text-center text-gray-700 sm:text-base whitespace-nowrap">
                           <div className="inline-flex items-center gap-x-3">

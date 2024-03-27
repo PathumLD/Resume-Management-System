@@ -23,6 +23,9 @@ import CandidateEditProfile from './pages/candidate/CandidateEditProfile'
 import CandidateCompanyView from './pages/candidate/CandidateCompanyView'
 import CompanyCandidates from './pages/company/CompanyCandidates'
 import CompanyCandidateView from './pages/company/CompanyCandidateView'
+import VisitorRegister from './pages/VisitorRegister'
+import VisitorVacancies from './pages/VisitorVacancies'
+import VisitorLogin from './pages/VisitorLogin'
 
 
 
@@ -61,6 +64,9 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/visitor-register" element={<VisitorRegister />} />
+        <Route path="/visitor-login" element={<VisitorLogin />} />
+        <Route path="/visitor-vacancies" element={<VisitorVacancies />} />
 
         
         <>

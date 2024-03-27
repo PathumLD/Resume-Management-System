@@ -23,9 +23,9 @@ const CandidateCompanies = () => {
   }, []); // Empty dependency array means this effect runs once on mount
 
   return (
-    <div className="container px-4 mx-auto">
+    <div className="container px-4 mx-auto bg-slate-100 rounded-lg h-[calc(100vh-110px)]">
       {/* ... other components */}
-      <section className="grid grid-cols-1 gap-8 mt-10 md:grid-cols-4 lg:grid-cols-6">
+      <section className="grid grid-cols-1 gap-8 pt-10 md:grid-cols-4 lg:grid-cols-6">
         {companies.map((company) => (
           <CompanyCard key={company.id} company={company}  />
         ))}

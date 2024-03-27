@@ -9,7 +9,12 @@ const CompanyExtra = () => {
   const clientId = localStorage.getItem('clientId');
   const companyToken = localStorage.getItem('clientToken'); // Make sure to get the companyToken
   
- 
+  const openVacancyAddPopup = () => {
+    setIsVacancyAddPopupOpen(true);
+    };
+    const closeVacancyAddPopup = () => {
+    setIsVacancyAddPopupOpen(false);
+    };
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -65,8 +70,13 @@ const CompanyExtra = () => {
     <>
       <div className="flex items-center justify-between mt-10 ">
         <h2 className="mb-6 ml-6 text-lg font-semibold sm:ml-10 sm:text-xl md:text-2xl">Current Vacancy Details</h2>
-        
+        <button className="p-2 font-medium text-green-500 border-2 hover:border-green-500 rounded-xl hover:text-green-600 text-md" onClick={openVacancyAddPopup}>
+          New Vacancy
+        </button>
       </div>
+      <AddPopup isOpen={isVacancyAddPopupOpen} closePopup={closeVacancyAddPopup} title="Add Vacancy">
+        <AddVacancy />
+      </AddPopup>
       
       <table className="min-w-full mt-4 text-sm text-center bg-white divide-y-2 divide-gray-200">
           <thead className="ltr:text-left rtl:text-right">
@@ -78,14 +88,28 @@ const CompanyExtra = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-          {jobs.filter(job => job.jobStatus === 'Open').map((job, index) => (
+          {jobs.map((job, index) => (
               <tr key={index}>
                 <td className="px-4 py-2 text-gray-700 whitespace-nowrap">{job.jobTitle}</td>
                 <td className="px-4 py-2 text-gray-700 whitespace-nowrap">{job.jobType}</td>
-                <td className="px-4 py-2 font-medium text-green-500 text-md whitespace-nowrap">{job.jobStatus}</td>
+                <td className="px-4 py-2 whitespace-nowrap">
+                  {job.jobStatus === 'Open' ? (
+                      <span className="font-medium text-green-500">Open</span>
+                  ) : job.jobStatus === 'Close' ? (
+                      <span className="font-medium text-red-500">Close</span>
+                  ) : (
+                      <span className="font-medium">{job.jobStatus}</span>
+                  )}
+
+                  
+                </td>
+
                 <td className="px-4 py-2 text-gray-700 whitespace-nowrap">
-                  <button onClick={() => handleBlockApplications(job._id)} className="p-2 font-medium text-red-500 border hover:border-red-500 rounded-3xl hover:text-red-500 hover:bg-transparent">
-                    Block Applications
+                  <button onClick={() => handleBlockApplications(job._id)} className="p-2">
+                  {job.jobStatus === 'Close' ? (
+                      <span className="p-2 font-medium border text-blue hover:border-blue rounded-3xl hover:text-blue hover:bg-transparent ">Reactivate</span>
+                  ) : <span className="p-2 font-medium text-red-500 border rounded-3xl hover:text-red-500 hover:border-red-500 hover:bg-transparent">Block Applications</span>}
+                    
                   </button>
                 </td>
               </tr>

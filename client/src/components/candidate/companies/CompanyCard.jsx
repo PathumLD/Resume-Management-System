@@ -13,7 +13,7 @@ const CompanyCard = ({ company }) => {
     return (
       <>
         <button
-          className="flex-wrap items-center justify-center block shadow-xl bg-slate-100 rounded-xl hover:bg-gray-200 focus:outline-none"
+          className="flex-wrap items-center justify-center block bg-white shadow-xl rounded-xl hover:bg-gray-200 focus:outline-none"
           onClick={handleProfileView}
         >
           <div className="grid w-full grid-rows-2 gap-4">
