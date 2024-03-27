@@ -78,7 +78,7 @@ const CompanyExtra = () => {
         <AddVacancy />
       </AddPopup>
       
-      <table className="min-w-full mt-4 text-sm text-center bg-white divide-y-2 divide-gray-200">
+      <table className="min-w-full mt-4 text-sm text-center divide-y-2 divide-gray-200 rounded-lg shadow-lg bg-slate-50">
           <thead className="ltr:text-left rtl:text-right">
             <tr>
               <th className="px-4 py-2 text-lg font-medium text-gray-900 whitespace-nowrap">Job Title</th>

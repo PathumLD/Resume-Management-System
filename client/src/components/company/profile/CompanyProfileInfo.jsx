@@ -88,31 +88,45 @@ const CompanyProfileInfo = () => {
         </div>
 
         <div className='flex flex-col items-start mt-4'>
-          <label htmlFor="linkedin" className='font-medium text-blue-text'>
-            Your Linkedin
-          </label>
-          <div
-            id="linkedin"
-            name="linkedin"
-            className='p-2 text-justify rounded-md text-md text-primary-text'
-          >
-            {company?.linkedin || 'No Linkedin available'}
-          </div>
-        </div>
+              <label htmlFor="linkedin" className='font-medium text-blue-text'>
+                Company Linkedin
+              </label>
+              {company?.linkedin ? (
+                <a
+                  href={company.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className='p-2 text-justify rounded-md text-md text-primary-text hover:underline hover:font-semibold'
+                >
+                  {company.linkedin}
+                </a>
+              ) : (
+                <div className='p-2 text-justify rounded-md text-md text-primary-text '>
+                  No Linkedin available
+                </div>
+              )}
+            </div>
 
 
-        <div className='flex flex-col items-start mt-4'>
-          <label htmlFor="website" className='font-medium text-blue-text'>
-            Company Website
-          </label>
-          <div
-            id="website"
-            name="website"
-            className='p-2 text-justify rounded-md text-md text-primary-text'
-          >
-            {company?.website || 'No website available'}
-          </div>
-        </div>
+            <div className='flex flex-col items-start mt-4'>
+              <label htmlFor="website" className='font-medium text-blue-text '>
+                Company Website
+              </label>
+              {company?.website ? (
+                <a
+                  href={company.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className='p-2 text-justify rounded-md text-md text-primary-text hover:underline hover:font-semibold'
+                >
+                  {company.website}
+                </a>
+              ) : (
+                <div className='p-2 text-justify rounded-md text-md text-primary-text'>
+                  No website available
+                </div>
+              )}
+            </div>
 
         
         

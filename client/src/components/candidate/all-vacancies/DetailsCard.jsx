@@ -61,7 +61,7 @@ const DetailsCard = () => {
     <>
 
         <div className="grid w-full grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-8 ">
-            <div className="p-4 bg-gray-200 rounded-lg ">
+            <div className="p-4 bg-gray-100 rounded-lg shadow-lg ">
                 <FiUsers className="hidden mx-auto mb-1 sm:w-8 sm:h-8 text-primary sm:block" />
 
                 <h5 className="mb-1 font-medium leading-tight text-center text-md lg:text-xl text-primary-text">
@@ -72,7 +72,7 @@ const DetailsCard = () => {
                 </h1> 
             </div>
             
-            <div className="p-4 bg-gray-200 rounded-lg ">
+            <div className="p-4 bg-gray-100 rounded-lg shadow-lg ">
                 <FiHome className="hidden mx-auto mb-1 sm:w-8 sm:h-8 text-primary sm:block" />
 
                 <h5 className="mb-1 font-medium leading-tight text-center text-md lg:text-xl text-primary-text">
@@ -83,7 +83,7 @@ const DetailsCard = () => {
                 </h1>
             </div>
 
-            <div className="p-4 bg-gray-200 rounded-lg ">
+            <div className="p-4 bg-gray-100 rounded-lg shadow-lg ">
                 <FiInbox className="hidden mx-auto mb-1 sm:w-8 sm:h-8 text-primary sm:block" />
 
                 <h5 className="mb-1 font-medium leading-tight text-center text-md lg:text-xl text-primary-text">
@@ -94,7 +94,7 @@ const DetailsCard = () => {
                 </h1>
             </div>
 
-            <div className="p-4 bg-gray-200 rounded-lg ">
+            <div className="p-4 bg-gray-100 rounded-lg shadow-lg ">
                 <FiUserCheck className="hidden mx-auto mb-1 sm:w-8 sm:h-8 text-primary sm:block" />
 
                 <h5 className="mb-1 font-medium leading-tight text-center text-md lg:text-xl text-primary-text">

@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
  
     return (
       <>
-      <div className='flex flex-col'>
+      <div className='flex flex-col bg-slate-200'>
       <div className='fixed w-full '>
         {userType === 'candidate' ? <Navbar /> : userType === 'company' ? <CompanyNavbar /> : null}
         

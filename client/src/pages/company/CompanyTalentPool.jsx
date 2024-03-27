@@ -24,14 +24,17 @@ const CompanyTalentPool = () => {
 
  return (
     <>
-      <div className="container p-4 px-8 mx-auto bg-slate-100 h-[calc(100vh-110px)]">
-        {/* ... other components */}
-        <section className="grid grid-cols-1 gap-8 my-12 sm:grid-cols-2 lg:grid-cols-4">
-          {candidates.map((candidate) => (
-            <TalentCard key={candidate._id} candidate={candidate} />
-          ))}
-        </section>
+      <div className="flex justify-center h-[calc(100vh-80px)]">
+        <div className="container p-4 px-16 bg-white rounded-lg">
+          {/* ... other components */}
+          <section className="grid grid-cols-1 gap-8 mx-auto my-8 sm:grid-cols-2 lg:grid-cols-4">
+            {candidates.map((candidate) => (
+              <TalentCard key={candidate._id} candidate={candidate} />
+            ))}
+          </section>
+        </div>
       </div>
+
     </>
  );
 };

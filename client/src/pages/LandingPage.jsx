@@ -49,7 +49,7 @@ const LandingPage = () => {
             Unlock Potential, Unleash Talent
           </p>
 
-          <button className='px-4 py-3 my-6 text-lg font-semibold bg-blue-600 hover:bg-blue-600/30 rounded-2xl' type='submit' onClick={handleGetStarted}>Get Started</button>
+          <button className='px-4 py-3 my-6 text-lg font-semibold border-2 bg-blue hover:border-blue hover:border-2 hover:bg-transparent rounded-2xl' type='submit' onClick={handleGetStarted}>Get Started</button>
         </div>
       </div>
       <div style={overlayStyle}></div>

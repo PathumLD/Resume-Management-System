@@ -37,7 +37,7 @@ const CompanyCandidates = () => {
     }, []);
 
     return (
-        <div className="container p-4 px-4 mx-auto bg-slate-100 h-[calc(100vh-110px)]">
+        <div className="container p-4 px-4 mx-auto bg-white h-[calc(100vh-110px)]">
             <section className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 ">
                 {candidates.map((candidate) => (
                     <CandidateCard key={candidate._id} candidate={candidate} />

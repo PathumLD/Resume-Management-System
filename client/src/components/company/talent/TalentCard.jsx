@@ -18,14 +18,14 @@ const TalentCard = ({ candidate }) => {
             </div>
         </button> */}
 
-      <div className='p-4 overflow-hidden transition-transform duration-300 shadow-md bg-emerald-50 rounded-xl hover:shadow-lg transform-gpu hover:-translate-y-2 hover:scale-110 w-80 h-96'>
+      <div className='p-4 overflow-hidden transition-transform duration-300 shadow-md bg-slate-50 rounded-xl hover:shadow-lg transform-gpu hover:-translate-y-2 hover:scale-110 w-80 h-96 outline outline-offset-1 outline-1 outline-gray-400 hover:outline-2'>
             <div className="front">
                 <img src={candidate.img} alt={candidate.candidateName} className="object-cover h-40 rounded-t-lg w-72" />
                 <h2 className="mt-2 text-3xl font-bold text-center">{candidate.candidateName}</h2>
                 <h3 className="mt-3 text-lg font-semibold text-center opacity-50 ">{candidate.jobType} {candidate.jobTitle}</h3>
             </div>
             <div className="absolute top-0 left-0 w-full h-full transition-opacity duration-300 transform opacity-0 back bg-gradient-to-br from-sky-900 to-sky-500 hover:opacity-100 rotate-y-180">
-                <div className="flex flex-col items-center justify-center w-full h-full p-4">
+                <div className="flex flex-col w-full h-full p-4 mt-8">
                     <div className='flex flex-row justify-center gap-4 '>
                     <p className="text-2xl text-center text-white">
                         <a href={candidate.linkedin} target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
@@ -38,7 +38,7 @@ const TalentCard = ({ candidate }) => {
                     </p>
 
                     </div>
-                    <p className="mt-2 text-base text-justify text-white">{candidate.bio}</p>
+                    <p className="mt-4 text-base text-justify text-white">{candidate.bio}</p>
                 </div>
             </div>
         </div>

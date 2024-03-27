@@ -52,13 +52,14 @@ const Register = () => {
     
   return (
     <>
-      <div className='bg-blue '>
-        <h1 className="flex justify-center mt-10 text-5xl font-bold leading-7 text-blue ">Sign Up</h1>
+    <div className="absolute flex items-center justify-center w-full h-full bg-gradient-to-br from-blue to-blue">
+  <div className="w-full max-w-xl px-5 py-8 border-2 border-white rounded-lg shadow-lg bg-white/20">
+    <h1 className="mb-8 text-5xl font-bold text-center text-white ">Sign Up</h1>
         <form action="#" method="POST" onSubmit={handleSubmit}  className="max-w-xl py-5 mx-5 mt-6 space-y-8 lg:border-opacity-0 sm:mx-auto sm:mt-6 sm:space-y-5 lg:rounded-xl l "> {/* lg:border-x-2 lg:border-t-2 xl:border-b-8 lg:border-blue/20 */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-6">
               
               <div className=" sm:col-span-6">
-                <label htmlFor="name" className="block text-sm font-medium leading-5 text-gray-200">Name</label>
+                <label htmlFor="name" className="block text-sm font-medium leading-5 text-white">Name</label>
                 <div className="mt-1 rounded-md shadow-sm">
                   <input
                     id="name"
@@ -72,7 +73,7 @@ const Register = () => {
               </div>
   
               <div className=" sm:col-span-6">
-                <label htmlFor="email" className="block text-sm font-medium leading-5 text-gray-200">Email</label>
+                <label htmlFor="email" className="block text-sm font-medium leading-5 text-white">Email</label>
                 <div className="mt-1 rounded-md shadow-sm">
                   <input
                     id="email"
@@ -86,7 +87,7 @@ const Register = () => {
               </div>
   
               <div className="sm:col-span-6">
-                <label htmlFor="password" className="block text-sm font-medium leading-5 text-gray-200">Password</label>
+                <label htmlFor="password" className="block text-sm font-medium leading-5 text-white">Password</label>
                 <div className="mt-1 rounded-md shadow-sm">
                   <input
                     id="password"
@@ -99,7 +100,7 @@ const Register = () => {
               </div>
   
               <div className="sm:col-span-6">
-                <label htmlFor="confirmPassword" className="block text-sm font-medium leading-5 text-gray-200">Confirm Password</label>
+                <label htmlFor="confirmPassword" className="block text-sm font-medium leading-5 text-white">Confirm Password</label>
                 <div className="mt-1 rounded-md shadow-sm">
                   <input
                     id="confirmPassword"
@@ -113,7 +114,7 @@ const Register = () => {
               </div>
 
               <div className="sm:col-span-6">
-                <label htmlFor="userType" className="block text-sm font-medium leading-5 text-gray-200">
+                <label htmlFor="userType" className="block text-sm font-medium leading-5 text-white">
                     User Type
                 </label>
                 <div className="mt-1 rounded-md shadow-sm">
@@ -132,30 +133,31 @@ const Register = () => {
 
   
               </div>
-          <div className="flex justify-center">
-            <button className="px-12 py-3 my-2 text-lg font-semibold text-white bg-blue-900 hover:bg-blue-100/50 rounded-xl" type="submit" >
-              Sign Up
-            </button>
-          </div>
+              <div className="flex justify-center">
+              <button className="px-12 py-3 my-2 text-lg font-semibold bg-white border-2 border-white text-blue hover:bg-transparent hover:text-white rounded-xl" type="submit" >
+                Sign Up
+              </button>
+            </div>
 
           <hr className='my-4' />
 
-          <h3 className='flex justify-center font-medium text-white'>or SignUp with </h3>
+          {/* <h3 className='flex justify-center font-medium text-white'>or SignUp with </h3>
 
           <div className='flex justify-center gap-8'>
-            <button className="px-5 py-5 text-lg font-semibold text-blue-700 bg-white rounded-full hover:text-white hover:bg-blue-900" type="submit">
+            <button className="px-5 py-5 text-lg font-semibold bg-white rounded-full text-blue hover:text-white hover:bg-blue" type="submit">
               <FaGoogle />
             </button>
-            <button className="px-5 py-5 text-lg font-semibold text-blue-700 bg-white rounded-full hover:text-white hover:bg-blue-900" type="submit">
+            <button className="px-5 py-5 text-lg font-semibold bg-white rounded-full text-blue hover:text-white hover:bg-blue" type="submit">
               <FaFacebookF />
             </button>
-            <button className="px-5 py-5 text-lg font-semibold text-blue-700 bg-white rounded-full hover:text-white hover:bg-blue-900" type="submit">
+            <button className="px-5 py-5 text-lg font-semibold bg-white rounded-full text-blue hover:text-white hover:bg-blue" type="submit">
               <FaLinkedinIn />
             </button>
-          </div>
+          </div> */}
 
-          <h3 className='flex justify-center text-white text-20'>Already have an account? <span className='ml-3 font-semibold hover:underline text-blue hover:text-decoration-line:'><a href="/login"> SignIn</a></span></h3>
+          <h3 className='flex justify-center text-white text-20'>Already have an account? <span className='ml-3 font-semibold text-white hover:underline hover:text-decoration-line:'><a href="/login"> SignIn</a></span></h3>
         </form>
+      </div>
       </div>
     </>
   )

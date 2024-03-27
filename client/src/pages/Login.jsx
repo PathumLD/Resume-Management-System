@@ -77,8 +77,8 @@ const Login = () => {
 
   return (
     <>
-      <div className='justify-center bg-blue'>
-      <div className='pt-10 max-w-[45rem] mx-auto rounded-xl '>
+      <div className="absolute flex items-center justify-center w-full h-full bg-gradient-to-br from-blue to-blue">
+  <div className="w-full max-w-xl px-5 py-8 border-2 border-white rounded-lg shadow-lg bg-white/20">
         <h1 className="flex justify-center py-10 mx-auto text-5xl font-bold leading-7 text-white ">Sign In</h1>
         <form
           method='POST'
@@ -116,7 +116,7 @@ const Login = () => {
           <Link to='/forgot-password' className='flex justify-start font-semibold text-white hover:underline'>Forgot Password?</Link>
           
             <div className="flex justify-center">
-              <button className="px-12 py-3 my-2 text-lg font-semibold bg-white text-blue hover:bg-blue-100/50 rounded-xl" type="submit" >
+              <button className="px-12 py-3 my-2 text-lg font-semibold bg-white border-2 border-white text-blue hover:bg-transparent hover:text-white rounded-xl" type="submit" >
                 Sign In
               </button>
             </div>
@@ -124,7 +124,7 @@ const Login = () => {
 
           <hr className='my-4' />
 
-          <h3 className='flex justify-center font-medium text-white'>or SignUp with </h3>
+          {/* <h3 className='flex justify-center font-medium text-white'>or SignUp with </h3>
 
           <div className='flex justify-center gap-8'>
             <button className="px-5 py-5 text-lg font-semibold bg-white rounded-full text-blue hover:text-white hover:bg-gray-400" type="submit">
@@ -136,7 +136,7 @@ const Login = () => {
             <button className="px-5 py-5 text-lg font-semibold bg-white rounded-full text-blue hover:text-white hover:bg-gray-400" type="submit">
               <FaLinkedinIn />
             </button>
-          </div>
+          </div> */}
 
           <h3 className='flex justify-center text-white text-20'>
             Don't have an account?{' '}

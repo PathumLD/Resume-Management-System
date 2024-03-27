@@ -63,10 +63,10 @@ const Table = () => {
         <>
             <section className="w-full mx-auto mt-2 ">
                 <div className="flex flex-col">
-                    <div className="inline-block min-w-full py-2 align-middle ">
-                        <div className="overflow-hidden rounded-t-xl">
+                    <div className="inline-block min-w-full p-4 align-middle rounded-lg shadow-lg bg-slate-50">
+                        <div className="overflow-hidden rounded-t-xl ">
                             {/* Scrollable Table Body */}
-                            <div className="overflow-x-auto max-h-[50rem]">
+                            <div className="overflow-x-auto max-h-[50rem] ">
                                 <table className="min-w-full divide-y divide-gray-200 ">
                                     <thead className="h-4 bg-gray-50">
                                         <tr className=''>

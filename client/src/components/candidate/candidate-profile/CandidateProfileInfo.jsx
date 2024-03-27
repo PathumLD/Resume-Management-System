@@ -154,7 +154,7 @@ const CandidateProfileInfo = () => {
                   href={candidate.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className='p-2 text-justify rounded-md text-md text-primary-text'
+                  className='p-2 text-justify rounded-md text-md text-primary-text hover:underline hover:font-semibold'
                 >
                   {candidate.linkedin}
                 </a>
@@ -174,7 +174,7 @@ const CandidateProfileInfo = () => {
                   href={candidate.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className='p-2 text-justify rounded-md text-md text-primary-text'
+                  className='p-2 text-justify rounded-md text-md text-primary-text hover:underline hover:font-semibold'
                 >
                   {candidate.github}
                 </a>
@@ -194,7 +194,7 @@ const CandidateProfileInfo = () => {
                   href={candidate.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className='p-2 text-justify rounded-md text-md text-primary-text'
+                  className='p-2 text-justify rounded-md text-md text-primary-text hover:underline hover:font-semibold'
                 >
                   {candidate.website}
                 </a>

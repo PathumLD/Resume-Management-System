@@ -6,15 +6,17 @@ import SearchBar from '../../components/candidate/common/SearchBar';
 const CandidateAllVacancies = () => {
 
   return (
-    <div className='w-full p-4 overflow-hidden rounded-lg bg-slate-100 h-[calc(100vh-110px)]  '>
+    <div className='w-full  overflow-hidden rounded-lg bg-slate-200 h-[calc(100vh-80px)]  '>
+      <div className='p-4 bg-white rounded-lg h-[calc(100vh-80px)]'>
       <div className='flex flex-wrap justify-center lg:mt-6 lg:mx-10 gap-x-4 gap-y-2'>
         <DetailsCard />
       </div>
       <div className='flex flex-wrap justify-center mt-4 lg:mt-6 lg:mx-10 gap-x-4 gap-y-2'>
         {/* <SearchBar /> */}
       </div>
-      <div className='mt-4 overflow-x-auto bg-white rounded-lg shadow-lg lg:mt-6'>
+      <div className='mt-4 overflow-x-auto rounded-lg shadow-lg bg-slate-50 lg:mt-6'>
         <JobsTable />
+      </div>
       </div>
     </div>
   );
